@@ -3,46 +3,47 @@ create database DBControColonia_in5cm;
 use DBControColonia_in5cm;
 
 create table Casa(
-	id_casa int auto_increment not null,
-	no_de_casa varchar(5) not null,
-	direccion varchar(25) not null,
-	estado enum("ocupada", "disponible", "mantenimiento") not null,
-	propietario varchar(100) not null,
-	precio_casa decimal(12,2) not null,
-	primary key PK_id_casa(id_casa)
+	id_Casa int auto_increment not null,
+	no_De_Casa varchar(5) not null,
+	Direccion varchar(25) not null,
+	Estado enum("ocupada", "disponible", "mantenimiento") not null,
+	Propietario varchar(100) not null,
+	precio_Casa decimal(12,2) not null,
+	primary key PK_id_casa(id_Casa)
 );
 
 create table Residente(
-	id_residente int not null auto_increment,
-	nombre_residente varchar(100) not null,
-	dpi_residente varchar(13) not null,
-	telefono_residente varchar(8) not null,
-	posicion enum("activo", "inactivo") not null,
-	id_casa int not null,
-	primary key PK_id_residente(id_residente),
-	constraint FK_residente_casa foreign key (id_casa)
-	references Casa(id_casa) on delete cascade
+	id_Residente int not null auto_increment,
+	nombre_Residente varchar(100) not null,
+	dpi_Residente varchar(13) not null,
+	telefono_Residente varchar(8) not null,
+	Posicion enum("activo", "inactivo") not null,
+	id_Casa int not null,
+	primary key PK_id_Residente(id_Residente),
+	constraint FK_Residente_Casa foreign key (id_Casa)
+	references Casa(id_Casa) on delete cascade
 );
+
 
 -- PROCEDIMIENTO ALMACENADOS --
 
 	-- Casa --
 -- Create --
 Delimiter $$ 
-	create procedure sp_Casa_create(c_no_de_casa varchar(5), c_direccion varchar(25), 
-    c_estado enum("ocupada", "disponible", "mantenimiento"), c_propietario varchar(100), c_precio_casa decimal(12, 2))
+	create procedure sp_Casa_create(c_no_De_Casa varchar(5), c_Direccion varchar(25), 
+    c_Estado enum("ocupada", "disponible", "mantenimiento"), c_Propietario varchar(100), c_precio_Casa decimal(12, 2))
     begin 
-		insert into Casa(no_de_casa, direccion, estado, propietario, precio_casa)
-		values (c_no_de_casa, c_direccion, c_estado, c_propietario, c_precio_casa);
-		select last_insert_id() as id_casa;
+		insert into Casa(no_De_Casa, Direccion, Estado, Propietario, precio_Casa)
+		values (c_no_De_Casa, c_Direccion, c_Estado, c_Propietario, c_precio_Casa);
+		select last_insert_id() as id_Casa;
     end $$
 Delimiter ;
 
 -- Delete --
 Delimiter $$
-	create procedure sp_Casa_delete(in c_id_casa int )
+	create procedure sp_Casa_delete(in c_id_Casa int )
     begin
-		delete from Casa where id_casa = c_id_casa;
+		delete from Casa where id_Casa = c_id_Casa;
         select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -51,23 +52,23 @@ Delimiter ;
 Delimiter $$
 	create procedure sp_Casa_read_all()
     begin 
-		select * from Casa order by id_casa;
+		select * from Casa order by id_Casa;
     end $$
 Delimiter ;
 
 -- Update -- 
 Delimiter $$
-	create procedure sp_Casa_update(in c_id_casa int, in c_no_de_casa varchar(5), in c_direccion varchar(25), in c_estado enum("ocupada", "disponible", "mantenimiento"), 
-    in c_propietario varchar(100), in c_precio_casa decimal(12, 2))
+	create procedure sp_Casa_update(in c_id_Casa int, in c_no_De_Casa varchar(5), in c_Direccion varchar(25), in c_Estado enum("ocupada", "disponible", "mantenimiento"), 
+    in c_Propietario varchar(100), in c_precio_Casa decimal(12, 2))
     begin 
 		update Casa
-		set id_casa = c_id_casa,
-			no_de_casa = c_no_de_casa,
-            direccion = c_direccion,
-            estado = c_estado,
-            propietario = c_propietario,
-            precio_casa = c_precio_casa
-            where id_casa = c_id_casa;
+		set id_Casa = c_id_Casa,
+			no_De_Casa = c_no_De_Casa,
+            Direccion = c_Direccion,
+            Estado = c_Estado,
+            Propietario = c_Propietario,
+            precio_Casa = c_precio_Casa
+            where id_Casa = c_id_Casa;
 		select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -75,20 +76,20 @@ Delimiter ;
 	-- Residente --
 -- Create --
 Delimiter $$
-	create procedure sp_Residente_create(r_nombre_residente varchar(100), r_dpi_residente varchar(13),
-    r_telefono_residente varchar(8), r_posicion enum("activo","inactivo"), r_id_casa int)
+	create procedure sp_Residente_create(r_nombre_Residente varchar(100), r_dpi_Residente varchar(13),
+    r_telefono_Residente varchar(8), r_Posicion enum("activo","inactivo"), r_id_Casa int)
     begin
-		insert into residente(nombre_residente, dpi_residente, telefono_residente, posicion, id_casa)
-		values (r_nombre_residente, r_dpi_residente, r_telefono_residente, r_posicion, r_id_casa);
+		insert into Residente(nombre_Residente, dpi_Residente, telefono_Residente, Posicion, id_Casa)
+		values (r_nombre_Residente, r_dpi_Residente, r_telefono_Residente, r_Posicion, r_id_Casa);
 		select last_insert_id() as id_residente;
     end $$
 Delimiter ;
 
 -- Delete --
 Delimiter $$
-	create procedure sp_Residente_delete(in p_id_residente int )
+	create procedure sp_Residente_delete(in p_id_Residente int )
     begin
-		delete from residente where id_residente = p_id_residente;
+		delete from Residente where id_Residente = p_id_Residente;
         select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -97,23 +98,23 @@ Delimiter ;
 Delimiter $$
 	create procedure sp_Residente_read_all()
     begin
-		select * from residente order by id_residente;
+		select * from Residente order by id_Residente;
     end $$
 Delimiter ;
 
 -- Update -- 
 Delimiter $$
-	create procedure sp_Residente_update(in r_id_residente int, in r_nombre_residente varchar(100), in r_dpi_residente varchar(13),
-    in r_telefono_residente varchar(8), in r_posicion enum("activo","inactivo"), in r_id_casa int)
+	create procedure sp_Residente_update(in r_id_Residente int, in r_nombre_Residente varchar(100), in r_dpi_Residente varchar(13),
+    in r_telefono_Residente varchar(8), in r_Posicion enum("activo","inactivo"), in r_id_Casa int)
     begin
-		update residente
-		set id_residente = r_id_residente,
-			nombre_residente = r_nombre_residente,
-            dpi_residente = r_dpi_residente,
-            telefono_residente = r_telefono_residente,
-            posicion = r_posicion,
-            id_casa = r_id_casa
-            where id_residente = r_id_residente;
+		update Residente
+		set id_Residente = r_id_Residente,
+			nombre_Residente = r_nombre_Residente,
+            dpi_Residente = r_dpi_Residente,
+            telefono_Residente = r_telefono_Residente,
+            Posicion = r_Posicion,
+            id_Casa = r_id_Casa
+            where id_Residente = r_id_Residente;
 		select row_count() as filas_afectadas;
     end $$
 Delimiter ;
