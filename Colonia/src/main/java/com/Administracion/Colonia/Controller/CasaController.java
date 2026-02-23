@@ -32,7 +32,7 @@ public class CasaController {
         }
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteCasa(@PathVariable Integer id){
         try {
             if(casaService.getCasaById(id) == null) {
@@ -45,7 +45,7 @@ public class CasaController {
         }
     }
 
-    @PostMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Object> updateCasa(@PathVariable Integer id, @RequestBody Casa casa){
         try {
             Casa actualizado = casaService.updateCasa(id, casa);
