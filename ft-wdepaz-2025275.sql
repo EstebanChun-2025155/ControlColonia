@@ -49,20 +49,20 @@ create table Residente(
 -- Casa --
 -- Create --
 Delimiter $$ 
-	create procedure sp_Casa_create(c_no_De_Casa varchar(5), c_Direccion varchar(25), 
-    c_Estado enum("ocupada", "disponible", "mantenimiento"), c_Propietario varchar(100), c_precio_Casa decimal(12, 2))
+	create procedure sp_Casa_create(p_no_De_Casa varchar(5), p_Direccion varchar(25), 
+    p_Estado enum("ocupada", "disponible", "mantenimiento"), p_Propietario varchar(100), p_precio_Casa decimal(12, 2))
     begin 
 		insert into Casa(no_De_Casa, Direccion, Estado, Propietario, precio_Casa)
-		values (c_no_De_Casa, c_Direccion, c_Estado, c_Propietario, c_precio_Casa);
+		values (p_no_De_Casa, p_Direccion, p_Estado, p_Propietario, p_precio_Casa);
 		select last_insert_id() as id_Casa;
     end $$
 Delimiter ;
 
 -- Delete --
 Delimiter $$
-	create procedure sp_Casa_delete(in c_id_Casa int )
+	create procedure sp_Casa_delete(in p_id_Casa int )
     begin
-		delete from Casa where id_Casa = c_id_Casa;
+		delete from Casa where id_Casa = p_id_Casa;
         select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -77,17 +77,17 @@ Delimiter ;
 
 -- Update -- 
 Delimiter $$
-	create procedure sp_Casa_update(in c_id_Casa int, in c_no_De_Casa varchar(5), in c_Direccion varchar(25), in c_Estado enum("ocupada", "disponible", "mantenimiento"), 
-    in c_Propietario varchar(100), in c_precio_Casa decimal(12, 2))
+	create procedure sp_Casa_update(in p_id_Casa int, in p_no_De_Casa varchar(5), in p_Direccion varchar(25), in p_Estado enum("ocupada", "disponible", "mantenimiento"), 
+    in p_Propietario varchar(100), in p_precio_Casa decimal(12, 2))
     begin 
 		update Casa
-		set id_Casa = c_id_Casa,
-			no_De_Casa = c_no_De_Casa,
-            Direccion = c_Direccion,
-            Estado = c_Estado,
-            Propietario = c_Propietario,
-            precio_Casa = c_precio_Casa
-            where id_Casa = c_id_Casa;
+		set id_Casa = p_id_Casa,
+			no_De_Casa = p_no_De_Casa,
+            Direccion = p_Direccion,
+            Estado = p_Estado,
+            Propietario = p_Propietario,
+            precio_Casa = p_precio_Casa
+            where id_Casa = p_id_Casa;
 		select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -95,11 +95,11 @@ Delimiter ;
 -- Seguridad --
 -- Create --
 Delimiter $$ 
-    create procedure sp_Seguridad_create(p_Nombre varchar(100), p_Puesto varchar(100), 
-    p_Jornada enum('dia','noche'), p_Salario decimal(10, 2), p_Telefono varchar(20))
+    create procedure sp_Seguridad_create(p_nombre varchar(100), p_puesto varchar(100), 
+    p_jornada enum('dia','noche'), p_salario decimal(10, 2), p_telefono varchar(20))
     begin 
-        insert into seguridad(Nombre, Puesto, Jornada, Salario, Telefono)
-        values (p_Nombre, p_Puesto, p_Jornada, p_Salario, p_Telefono);
+        insert into Seguridad(Nombre, Puesto, Jornada, Salario, Telefono)
+        values (p_nombre, p_puesto, p_jornada, p_salario, p_telefono);
         select last_insert_id() as id_Seguridad;
     end $$
 Delimiter ;
@@ -108,7 +108,7 @@ Delimiter ;
 Delimiter $$
     create procedure sp_Seguridad_delete(in p_id_seguridad int)
     begin
-        delete from Seguridad where id_Seguridad = p_Id_seguridad;
+        delete from Seguridad where id_Seguridad = p_id_seguridad;
         select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -123,16 +123,16 @@ Delimiter ;
 
 -- Update -- 
 Delimiter $$
-    create procedure sp_Seguridad_update(in p_id_seguridad int, in p_Nombre varchar(100), in p_Puesto varchar(100), 
-    in p_Jornada enum('dia','noche'), in p_Salario decimal(10, 2), in p_Telefono varchar(20))
+    create procedure sp_Seguridad_update(in p_id_seguridad int, in p_nombre varchar(100), in p_puesto varchar(100), 
+    in p_jornada enum('dia','noche'), in p_salario decimal(10, 2), in p_telefono varchar(20))
     begin 
-        update seguridad
-        set Nombre = p_Nombre,
-            Puesto = p_Puesto,
-            Jornada = p_Jornada,
-            Salario = p_Salario,
-            Telefono = p_Telefono
-            where id_Seguridad = p_Id_seguridad;
+        update Seguridad
+        set Nombre = p_nombre,
+            Puesto = p_puesto,
+            Jornada = p_jornada,
+            Salario = p_salario,
+            Telefono = p_telefono
+            where id_Seguridad = p_id_seguridad;
         select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -140,20 +140,20 @@ Delimiter ;
 -- Limpieza --
 -- Create --
 Delimiter $$
-    create procedure sp_Limpieza_create(o_Nombre varchar(100), o_Puesto varchar(100), 
-    o_Jornada enum('manana','tarde'), o_Salario decimal(10, 2), o_Telefono varchar(20))
+    create procedure sp_Limpieza_create(p_nombre varchar(100), p_puesto varchar(100), 
+    p_jornada enum('manana','tarde'), p_salario decimal(10, 2), p_telefono varchar(20))
     begin
-        insert into limpieza(Nombre, Puesto, Jornada, Salario, Telefono)
-        values (o_Nombre, o_Puesto, o_Jornada, o_Salario, o_Telefono);
+        insert into Limpieza(Nombre, Puesto, Jornada, Salario, Telefono)
+        values (p_nombre, p_puesto, p_jornada, p_salario, p_telefono);
         select last_insert_id() as id_Limpieza;
     end $$
 Delimiter ;
 
 -- Delete --
 Delimiter $$
-    create procedure sp_Limpieza_delete(in o_Id_limpieza int)
+    create procedure sp_Limpieza_delete(in p_id_limpieza int)
     begin
-        delete from Limpieza where id_Limpieza = o_Id_limpieza;
+        delete from Limpieza where id_Limpieza = p_id_limpieza;
         select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -162,22 +162,22 @@ Delimiter ;
 Delimiter $$
     create procedure sp_Limpieza_read_all()
     begin
-        select * from limpieza order by id_Limpieza;
+        select * from Limpieza order by id_Limpieza;
     end $$
 Delimiter ;
 
 -- Update -- 
 Delimiter $$
-    create procedure sp_Limpieza_update(in o_id_limpieza int, in o_Nombre varchar(100), in o_Puesto varchar(100), 
-    in o_Jornada enum('manana','tarde'), in o_Salario decimal(10, 2), in o_Telefono varchar(20))
+    create procedure sp_Limpieza_update(in p_id_limpieza int, in p_nombre varchar(100), in p_puesto varchar(100), 
+    in p_jornada enum('manana','tarde'), in p_salario decimal(10, 2), in p_telefono varchar(20))
     begin
         update Limpieza
-        set Nombre = o_Nombre,
-            Puesto = o_Puesto,
-            Jornada = o_Jornada,
-            Salario = o_Salario,
-            Telefono = o_Telefono
-            where id_Limpieza = o_id_limpieza;
+        set Nombre = p_nombre,
+            Puesto = p_puesto,
+            Jornada = p_jornada,
+            Salario = p_salario,
+            Telefono = p_telefono
+            where id_Limpieza = p_id_limpieza;
         select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -185,11 +185,11 @@ Delimiter ;
 -- Residente --
 -- Create --
 Delimiter $$
-	create procedure sp_Residente_create(r_nombre_Residente varchar(100), r_dpi_Residente varchar(13),
-    r_telefono_Residente varchar(8), r_Posicion enum("activo","inactivo"), r_id_Casa int)
+	create procedure sp_Residente_create(p_nombre_Residente varchar(100), p_dpi_Residente varchar(13),
+    p_telefono_Residente varchar(8), p_Posicion enum("activo","inactivo"), p_id_Casa int)
     begin
 		insert into Residente(nombre_Residente, dpi_Residente, telefono_Residente, Posicion, id_Casa)
-		values (r_nombre_Residente, r_dpi_Residente, r_telefono_Residente, r_Posicion, r_id_Casa);
+		values (p_nombre_Residente, p_dpi_Residente, p_telefono_Residente, p_Posicion, p_id_Casa);
 		select last_insert_id() as id_residente;
     end $$
 Delimiter ;
@@ -213,20 +213,21 @@ Delimiter ;
 
 -- Update -- 
 Delimiter $$
-	create procedure sp_Residente_update(in r_id_Residente int, in r_nombre_Residente varchar(100), in r_dpi_Residente varchar(13),
-    in r_telefono_Residente varchar(8), in r_Posicion enum("activo","inactivo"), in r_id_Casa int)
+	create procedure sp_Residente_update(in p_id_Residente int, in p_nombre_Residente varchar(100), in p_dpi_Residente varchar(13),
+    in p_telefono_Residente varchar(8), in p_Posicion enum("activo","inactivo"), in p_id_Casa int)
     begin
 		update Residente
-		set id_Residente = r_id_Residente,
-			nombre_Residente = r_nombre_Residente,
-            dpi_Residente = r_dpi_Residente,
-            telefono_Residente = r_telefono_Residente,
-            Posicion = r_Posicion,
-            id_Casa = r_id_Casa
-            where id_Residente = r_id_Residente;
+		set id_Residente = p_id_Residente,
+			nombre_Residente = p_nombre_Residente,
+            dpi_Residente = p_dpi_Residente,
+            telefono_Residente = p_telefono_Residente,
+            Posicion = p_Posicion,
+            id_Casa = p_id_Casa
+            where id_Residente = p_id_Residente;
 		select row_count() as filas_afectadas;
     end $$
 Delimiter ;
+
 
 CALL sp_casa_create('C001','Zona 1, Av 1','ocupada','Ana López',250000.00);
 CALL sp_casa_create('C002','Zona 2, Calle 3','disponible','Carlos Méndez',310500.00);
