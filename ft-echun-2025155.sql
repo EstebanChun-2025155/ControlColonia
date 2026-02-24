@@ -5,9 +5,9 @@ use DBControColonia_in5cm;
 create table Casa(
 	id_Casa int auto_increment not null,
 	no_De_Casa varchar(5) not null,
-	Direccion varchar(25) not null,
-	Estado enum("ocupada", "disponible", "mantenimiento") not null,
-	Propietario varchar(100) not null,
+	direccion varchar(25) not null,
+	estado enum("ocupada", "disponible", "mantenimiento") not null,
+	propietario varchar(100) not null,
 	precio_Casa decimal(12,2) not null,
 	primary key PK_id_casa(id_Casa)
 );
@@ -17,7 +17,7 @@ create table Residente(
 	nombre_Residente varchar(100) not null,
 	dpi_Residente varchar(13) not null,
 	telefono_Residente varchar(8) not null,
-	Posicion enum("activo", "inactivo") not null,
+	posicion enum("activo", "inactivo") not null,
 	id_Casa int not null,
 	primary key PK_id_Residente(id_Residente),
 	constraint FK_Residente_Casa foreign key (id_Casa)
@@ -30,20 +30,20 @@ create table Residente(
 	-- Casa --
 -- Create --
 Delimiter $$ 
-	create procedure sp_Casa_create(c_no_De_Casa varchar(5), c_Direccion varchar(25), 
-    c_Estado enum("ocupada", "disponible", "mantenimiento"), c_Propietario varchar(100), c_precio_Casa decimal(12, 2))
+	create procedure sp_Casa_create(p_no_De_Casa varchar(5), p_Direccion varchar(25), 
+    p_Estado enum("ocupada", "disponible", "mantenimiento"), p_Propietario varchar(100), p_precio_Casa decimal(12, 2))
     begin 
 		insert into Casa(no_De_Casa, Direccion, Estado, Propietario, precio_Casa)
-		values (c_no_De_Casa, c_Direccion, c_Estado, c_Propietario, c_precio_Casa);
+		values (p_no_De_Casa, p_Direccion, p_Estado, p_Propietario, p_precio_Casa);
 		select last_insert_id() as id_Casa;
     end $$
 Delimiter ;
 
 -- Delete --
 Delimiter $$
-	create procedure sp_Casa_delete(in c_id_Casa int )
+	create procedure sp_Casa_delete(in p_id_Casa int )
     begin
-		delete from Casa where id_Casa = c_id_Casa;
+		delete from Casa where id_Casa = p_id_Casa;
         select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -58,17 +58,17 @@ Delimiter ;
 
 -- Update -- 
 Delimiter $$
-	create procedure sp_Casa_update(in c_id_Casa int, in c_no_De_Casa varchar(5), in c_Direccion varchar(25), in c_Estado enum("ocupada", "disponible", "mantenimiento"), 
-    in c_Propietario varchar(100), in c_precio_Casa decimal(12, 2))
+	create procedure sp_Casa_update(in p_id_Casa int, in p_no_De_Casa varchar(5), in p_Direccion varchar(25), in p_Estado enum("ocupada", "disponible", "mantenimiento"), 
+    in p_Propietario varchar(100), in p_precio_Casa decimal(12, 2))
     begin 
 		update Casa
-		set id_Casa = c_id_Casa,
-			no_De_Casa = c_no_De_Casa,
-            Direccion = c_Direccion,
-            Estado = c_Estado,
-            Propietario = c_Propietario,
-            precio_Casa = c_precio_Casa
-            where id_Casa = c_id_Casa;
+		set id_Casa = p_id_Casa,
+			no_De_Casa = p_no_De_Casa,
+            Direccion = p_Direccion,
+            Estado = p_Estado,
+            Propietario = p_Propietario,
+            precio_Casa = p_precio_Casa
+            where id_Casa = p_id_Casa;
 		select row_count() as filas_afectadas;
     end $$
 Delimiter ;
@@ -76,11 +76,11 @@ Delimiter ;
 	-- Residente --
 -- Create --
 Delimiter $$
-	create procedure sp_Residente_create(r_nombre_Residente varchar(100), r_dpi_Residente varchar(13),
-    r_telefono_Residente varchar(8), r_Posicion enum("activo","inactivo"), r_id_Casa int)
+	create procedure sp_Residente_create(p_nombre_Residente varchar(100), p_dpi_Residente varchar(13),
+    p_telefono_Residente varchar(8), p_Posicion enum("activo","inactivo"), p_id_Casa int)
     begin
 		insert into Residente(nombre_Residente, dpi_Residente, telefono_Residente, Posicion, id_Casa)
-		values (r_nombre_Residente, r_dpi_Residente, r_telefono_Residente, r_Posicion, r_id_Casa);
+		values (p_nombre_Residente, p_dpi_Residente, p_telefono_Residente, p_Posicion, p_id_Casa);
 		select last_insert_id() as id_residente;
     end $$
 Delimiter ;
@@ -104,17 +104,17 @@ Delimiter ;
 
 -- Update -- 
 Delimiter $$
-	create procedure sp_Residente_update(in r_id_Residente int, in r_nombre_Residente varchar(100), in r_dpi_Residente varchar(13),
-    in r_telefono_Residente varchar(8), in r_Posicion enum("activo","inactivo"), in r_id_Casa int)
+	create procedure sp_Residente_update(in p_id_Residente int, in p_nombre_Residente varchar(100), in p_dpi_Residente varchar(13),
+    in p_telefono_Residente varchar(8), in p_Posicion enum("activo","inactivo"), in p_id_Casa int)
     begin
 		update Residente
-		set id_Residente = r_id_Residente,
-			nombre_Residente = r_nombre_Residente,
-            dpi_Residente = r_dpi_Residente,
-            telefono_Residente = r_telefono_Residente,
-            Posicion = r_Posicion,
-            id_Casa = r_id_Casa
-            where id_Residente = r_id_Residente;
+		set id_Residente = p_id_Residente,
+			nombre_Residente = p_nombre_Residente,
+            dpi_Residente = p_dpi_Residente,
+            telefono_Residente = p_telefono_Residente,
+            Posicion = p_Posicion,
+            id_Casa = p_id_Casa
+            where id_Residente = p_id_Residente;
 		select row_count() as filas_afectadas;
     end $$
 Delimiter ;
