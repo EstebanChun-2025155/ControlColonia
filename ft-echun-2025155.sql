@@ -119,16 +119,16 @@ Delimiter $$
     end $$
 Delimiter ;
 
-CALL sp_casa_create('C001','Zona 1, Av 1','ocupada','Ana López',250000.00);
-CALL sp_casa_create('C002','Zona 2, Calle 3','disponible','Carlos Méndez',310500.00);
-CALL sp_casa_create('C003','Zona 3, Av 5','mantenimiento','María Pérez',275900.00);
-CALL sp_casa_create('C004','Zona 4, Calle 1','ocupada','Luis García',420000.00);
-CALL sp_casa_create('C005','Zona 5, Av 2','disponible','Sofía Ramírez',198750.00);
-CALL sp_casa_create('C006','Zona 6, Calle 8','ocupada','Jorge Castillo',365000.00);
-CALL sp_casa_create('C007','Zona 7, Av 4','mantenimiento','Paola Díaz',289999.99);
-CALL sp_casa_create('C008','Zona 8, Calle 6','disponible','Miguel Hernández',330250.50);
-CALL sp_casa_create('C009','Zona 9, Av 3','ocupada','Elena Morales',410800.00);
-CALL sp_casa_create('C010','Zona 10, Calle 2','disponible','Ricardo Flores',299000.00);
+CALL sp_casa_create('C001','Avenida 1, Calle 1','ocupada','Ana López',250000.00);
+CALL sp_casa_create('C002','Avenida 2, Calle 3','disponible','Carlos Méndez',310500.00);
+CALL sp_casa_create('C003','Avenida 3, Calle 5','mantenimiento','María Pérez',275900.00);
+CALL sp_casa_create('C004','Avenida 4, Calle 1','ocupada','Luis García',420000.00);
+CALL sp_casa_create('C005','Avenida 5, Calle 2','disponible','Sofía Ramírez',198750.00);
+CALL sp_casa_create('C006','Avenida 6, Calle 8','ocupada','Jorge Castillo',365000.00);
+CALL sp_casa_create('C007','Avenida 7, Calle 4','mantenimiento','Paola Díaz',289999.99);
+CALL sp_casa_create('C008','Avenida 8, Calle 6','disponible','Miguel Hernández',330250.50);
+CALL sp_casa_create('C009','Avenida 9, Calle 3','ocupada','Elena Morales',410800.00);
+CALL sp_casa_create('C010','Avenida 10, Calle 2','disponible','Ricardo Flores',299000.00);
 
 CALL sp_residente_create('Juan Pérez','1234567890123','55123456','activo',1);
 CALL sp_residente_create('Lucía Gómez','2345678901234','55234567','activo',2);
