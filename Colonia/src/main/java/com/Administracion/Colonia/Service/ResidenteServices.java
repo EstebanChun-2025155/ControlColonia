@@ -1,0 +1,13 @@
+package com.Administracion.Colonia.Service;
+
+import com.Administracion.Colonia.Entity.Residente;
+
+import java.util.List;
+
+public interface ResidenteServices {
+    List<Residente> getAllResidente();
+    Residente getResidenteById(Integer id);
+    Residente saveResidente(Residente residente) throws RuntimeException;
+    Residente updateResidente(Integer id, Residente residente);
+    void deleteResidente(Integer id);
+}
