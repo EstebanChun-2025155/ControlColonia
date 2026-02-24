@@ -3,8 +3,10 @@ package com.Administracion.Colonia.Controller;
 import com.Administracion.Colonia.Entity.Casa;
 import com.Administracion.Colonia.Service.CasaService;
 import jakarta.persistence.Column;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +25,11 @@ public class CasaController {
     public List<Casa> getAlllCasa(){ return casaService.getAllCasa(); }
 
     @PostMapping
-    public ResponseEntity<Object> createCasa(@RequestBody Casa casa){
+    public ResponseEntity<Object> createCasa(@Valid @RequestBody Casa casa, BindingResult br){
+        if (br.hasErrors()){
+            return ResponseEntity.badRequest().body(br.getAllErrors().get(0).getDefaultMessage());
+        }
+
         try {
             Casa createCasa = casaService.saveCasa(casa);
             return new ResponseEntity<>(createCasa, HttpStatus.CREATED);
@@ -46,7 +52,10 @@ public class CasaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateCasa(@PathVariable Integer id, @RequestBody Casa casa){
+    public ResponseEntity<Object> updateCasa(@PathVariable Integer id, @Valid @RequestBody Casa casa, BindingResult br){
+        if (br.hasErrors()){
+            return ResponseEntity.badRequest().body(br.getAllErrors().get(0).getDefaultMessage());
+        }
         try {
             Casa actualizado = casaService.updateCasa(id, casa);
             return ResponseEntity.ok(actualizado);
