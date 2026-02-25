@@ -3,7 +3,7 @@ create database DBControColonia_in5cm;
 use DBControColonia_in5cm;
 
 create table Casa(
-	id_Casa int auto_increment not null,
+	id_Casa int auto_increment ,
 	no_De_Casa varchar(5) not null,
 	direccion varchar(25) not null,
 	estado enum("ocupada", "disponible", "mantenimiento") not null,
@@ -13,7 +13,7 @@ create table Casa(
 );
 
 create table Residente(
-	id_Residente int not null auto_increment,
+	id_Residente int auto_increment,
 	nombre_Residente varchar(100) not null,
 	dpi_Residente varchar(13) not null,
 	telefono_Residente varchar(8) not null,
@@ -77,10 +77,10 @@ Delimiter ;
 -- Create --
 Delimiter $$
 	create procedure sp_Residente_create(p_nombre_Residente varchar(100), p_dpi_Residente varchar(13),
-    p_telefono_Residente varchar(8), p_Posicion enum("activo","inactivo"), p_id_Casa int)
+    p_telefono_Residente varchar(8), p_posicion enum("activo","inactivo"), p_id_Casa int)
     begin
-		insert into Residente(nombre_Residente, dpi_Residente, telefono_Residente, Posicion, id_Casa)
-		values (p_nombre_Residente, p_dpi_Residente, p_telefono_Residente, p_Posicion, p_id_Casa);
+		insert into Residente(nombre_Residente, dpi_Residente, telefono_Residente, posicion, id_Casa)
+		values (p_nombre_Residente, p_dpi_Residente, p_telefono_Residente, p_posicion, p_id_Casa);
 		select last_insert_id() as id_residente;
     end $$
 Delimiter ;
@@ -105,14 +105,14 @@ Delimiter ;
 -- Update -- 
 Delimiter $$
 	create procedure sp_Residente_update(in p_id_Residente int, in p_nombre_Residente varchar(100), in p_dpi_Residente varchar(13),
-    in p_telefono_Residente varchar(8), in p_Posicion enum("activo","inactivo"), in p_id_Casa int)
+    in p_telefono_Residente varchar(8), in p_posicion enum("activo","inactivo"), in p_id_Casa int)
     begin
 		update Residente
 		set id_Residente = p_id_Residente,
 			nombre_Residente = p_nombre_Residente,
             dpi_Residente = p_dpi_Residente,
             telefono_Residente = p_telefono_Residente,
-            Posicion = p_Posicion,
+            posicion = p_posicion,
             id_Casa = p_id_Casa
             where id_Residente = p_id_Residente;
 		select row_count() as filas_afectadas;
