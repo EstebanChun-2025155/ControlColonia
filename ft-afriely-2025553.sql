@@ -45,15 +45,15 @@ create table Residente(
 );
 
 create table Visita(
-	id_Visita int auto_increment not null,
-    nombre_Visita varchar(80) not null,
+	id_visita int auto_increment not null,
+    nombre_visita varchar(80) not null,
     documento varchar(20) not null, 
     placa varchar(10) not null,
     motivo varchar(150) not null,
     id_Casa int not null,
     primary key Pk_id_visita(id_visita),
-    constraint Fk_id_casa foreign key(id_visita)
-    references Casa(id_casa) on delete cascade
+    constraint Fk_id_Casa foreign key(id_Casa)
+    references Casa(id_Casa) on delete cascade
 );
 
 create table Accesos(
@@ -254,7 +254,7 @@ Delimiter ;
 -- Visitas --
 -- Create --
 delimiter $$
-create procedure sp_Visitas_created(in p_Nombre varchar(80), in p_Documento varchar(20),
+create procedure sp_Visita_create(in p_Nombre varchar(80), in p_Documento varchar(20),
 								   in p_Placa varchar(10),in p_Motivo varchar(150),
                                    in id_Casita int)
 begin
@@ -309,7 +309,7 @@ delimiter ;
 -- Accesos--
 -- create--
 delimiter $$
-create procedure sp_Accesos_created(in p_tipo_Persona enum("visita", "residente", "personal"), in p_id_Seguridad varchar(20),
+create procedure sp_Accesos_create(in p_tipo_Persona enum("visita", "residente", "personal"), in p_id_Seguridad varchar(20),
 								   in p_hora_Entrada datetime,in p_hora_Salida datetime)
 begin
 	insert into Accesos(tipo_Persona,
@@ -410,14 +410,16 @@ CALL sp_Visita_create('Andrés López',      '4433221100', 'JKL-147', 'Inspecci�
 CALL sp_Visita_create('Valeria Moreno',    '3322110099', 'OPQ-258', 'Visita médica a domicilio',            8);
 CALL sp_Visita_create('Roberto Fuentes',   '2211009988', 'RST-369', 'Reparación de electrodomésticos',      9);
 CALL sp_Visita_create('Diana Herrera',     '1100998877', 'UVW-741', 'Entrega de documentos legales',       10);
+call sp_Visitas_read_all();
 
-CALL sp_accesos_create('visita',    1,  '2025-06-01 06:05:00', '2025-06-01 08:30:00');
-CALL sp_accesos_create('residente', 2,  '2025-06-01 22:10:00', '2025-06-01 23:45:00');
-CALL sp_accesos_create('personal',  3,  '2025-06-02 07:00:00', '2025-06-02 15:00:00');
-CALL sp_accesos_create('visita',    4,  '2025-06-02 21:30:00', '2025-06-02 22:00:00');
-CALL sp_accesos_create('residente', 5,  '2025-06-03 20:15:00', '2025-06-03 21:00:00');
-CALL sp_accesos_create('personal',  6,  '2025-06-03 06:50:00', '2025-06-03 14:50:00');
-CALL sp_accesos_create('visita',    7,  '2025-06-04 23:00:00', NULL);
-CALL sp_accesos_create('residente', 8,  '2025-06-04 07:45:00', '2025-06-04 09:00:00');
-CALL sp_accesos_create('personal',  9,  '2025-06-05 22:00:00', '2025-06-05 23:30:00');
-CALL sp_accesos_create('visita',    10, '2025-06-05 08:00:00', NULL);
+CALL sp_Accesos_create('visita',    1,  '2025-06-01 06:05:00', '2025-06-01 08:30:00');
+CALL sp_Accesos_create('residente', 2,  '2025-06-01 22:10:00', '2025-06-01 23:45:00');
+CALL sp_Accesos_create('personal',  3,  '2025-06-02 07:00:00', '2025-06-02 15:00:00');
+CALL sp_Accesos_create('visita',    4,  '2025-06-02 21:30:00', '2025-06-02 22:00:00');
+CALL sp_Accesos_create('residente', 5,  '2025-06-03 20:15:00', '2025-06-03 21:00:00');
+CALL sp_Accesos_create('personal',  6,  '2025-06-03 06:50:00', '2025-06-03 14:50:00');
+CALL sp_Accesos_create('visita',    7,  '2025-06-04 23:00:00', NULL);
+CALL sp_Accesos_create('residente', 8,  '2025-06-04 07:45:00', '2025-06-04 09:00:00');
+CALL sp_Accesos_create('personal',  9,  '2025-06-05 22:00:00', '2025-06-05 23:30:00');
+CALL sp_Accesos_create('visita',    10, '2025-06-05 08:00:00', NULL);
+call sp_Accesos_read_all();
