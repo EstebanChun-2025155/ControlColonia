@@ -1,10 +1,7 @@
 package com.Administracion.Colonia.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "seguridad")
@@ -28,13 +25,13 @@ public class Seguridad {
     @Column(name = "jornada")
     private String jornada;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacios")
-    @DecimalMin(value = "3500.00", message = "El precio debe ser mayor a 3500.00")
+    @NotNull(message = "El salario no debe estar vacío")
+    @DecimalMin(value = "3500.00", message = "El salario debe ser mayor a 3500.00")
     @Column(name = "salario")
     private Double salario;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacios")
-    @Size(max = 9, message = "El numero de telefono debe de iniciar con 4 numeros seguido de un - y termina con otros 4 numeros" )
+    @NotBlank(message = "El telefono no debe estar vacío")
+    @Pattern(regexp = "^\\d{4}-\\d{4}$", message = "El telefono debe tener formato 0000-0000")
     @Column(name = "telefono")
     private String telefono;
 
