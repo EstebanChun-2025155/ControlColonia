@@ -1,6 +1,9 @@
 package com.Administracion.Colonia.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Visita")
@@ -11,23 +14,30 @@ public class Visitas {
     @Column(name = "id_visita")
     private Integer id_visita;
 
-    @Column(name = "nombre_visita")
-    private String nombre_visita;
 
+    @NotBlank(message = "El campo de texto no debe de estar vacio")
+    @Column(name = "nombre_visita")
+    private String nombreVisita;
+
+    @NotBlank(message = "El campo de texto no debe de estar vacio")
+    @Size(max = 11, message = "El documento no puede exceder de 11 caracteres")
     @Column(name = "documento")
     private String documento;
 
+    @NotBlank(message = "El campo de texto no debe de estar vacio")
+    @Size(max = 6, message = "La placa no puede exceder de 6 caracteres")
     @Column(name = "placa")
     private String placa;
 
+    @NotBlank(message = "El campo de texto no debe de estar vacio")
     @Column(name = "motivo")
     private String motivo;
 
+    @NotNull(message = "El campo no puede estar vacio")
     @Column(name = "id_casa")
-    private Integer id_casa;
+    private Integer idCasa;
 
     //Se agregan Getters and Setters
-
 
     public Integer getId_visita() {
         return id_visita;
@@ -37,20 +47,12 @@ public class Visitas {
         this.id_visita = id_visita;
     }
 
-    public String getNombre_visita() {
-        return nombre_visita;
+    public String getNombreVisita() {
+        return nombreVisita;
     }
 
-    public void setNombre_visita(String nombre_visita) {
-        this.nombre_visita = nombre_visita;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
+    public void setNombreVisita(String nombreVisita) {
+        this.nombreVisita = nombreVisita;
     }
 
     public String getPlaca() {
@@ -69,11 +71,19 @@ public class Visitas {
         this.motivo = motivo;
     }
 
-    public Integer getId_casa() {
-        return id_casa;
+    public Integer getIdCasa() {
+        return idCasa;
     }
 
-    public void setId_casa(Integer id_casa) {
-        this.id_casa = id_casa;
+    public void setIdCasa(Integer idCasa) {
+        this.idCasa = idCasa;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 }
