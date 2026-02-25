@@ -7,14 +7,14 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table (name = "Multas")
+@Table (name = "Multa")
 public class Multa {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id_multa")
     private Integer idMulta;
-    
+
     @DecimalMin(value = "120.01", message = "El precio debe ser mayor a 120.00")
     @Column (name = "monto")
     private Double monto;
