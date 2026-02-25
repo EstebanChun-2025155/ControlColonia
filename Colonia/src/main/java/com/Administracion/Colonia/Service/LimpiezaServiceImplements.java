@@ -21,7 +21,8 @@ public class LimpiezaServiceImplements implements LimpiezaService{
     @Override
     public Limpieza saveLimpieza(Limpieza limpieza) throws  RuntimeException {
         try {
-            if (limpiezaRepository.existsByidLimpiezaAndNombreAndPuestoAndJornadaAndSalarioAndTelefono(
+            if (limpiezaRepository.existsByIdLimpiezaAndNombreAndPuestoAndJornadaAndSalarioAndTelefono(
+                    limpieza.getIdLimpieza(),
                     limpieza.getNombre(),
                     limpieza.getPuesto(),
                     limpieza.getJornada(),
@@ -40,7 +41,8 @@ public class LimpiezaServiceImplements implements LimpiezaService{
     public Limpieza updateLimpieza(Integer id, Limpieza limpieza) {
         Limpieza existingLimpieza = limpiezaRepository.findById(id).orElseThrow(() -> new RuntimeException("El empleado de limpieza no existe"));
 
-        if (limpiezaRepository.existsByidLimpiezaAndNombreAndPuestoAndJornadaAndSalarioAndTelefono(
+        if (limpiezaRepository.existsByIdLimpiezaAndNombreAndPuestoAndJornadaAndSalarioAndTelefono(
+                limpieza.getIdLimpieza(),
                 limpieza.getNombre(),
                 limpieza.getPuesto(),
                 limpieza.getJornada(),
