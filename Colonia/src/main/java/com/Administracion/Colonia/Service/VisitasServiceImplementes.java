@@ -37,7 +37,17 @@ public class VisitasServiceImplementes implements VisitasService{
 
     @Override
     public Visitas updateVisitas(Integer id, Visitas visitas) {
-        return null;
+        Visitas visitas1 = visitasRepository.findById(id).orElse(null);
+        if(visitas1 != null) {
+            visitas1.setNombre_visita(visitas.getNombre_visita());
+            visitas1.setDocumento(visitas.getDocumento());
+            visitas1.setPlaca(visitas.getPlaca());
+            visitas1.setMotivo(visitas.getMotivo());
+            visitas1.setId_casa(visitas.getId_casa());
+        }else {
+            throw new IllegalArgumentException("Visita no encontrada");
+        }
+        return visitasRepository.save(visitas1);
     }
 
     @Override
