@@ -37,7 +37,7 @@ public class ResidenteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteResidente(@PathVariable Integer id){
+    public ResponseEntity<?> deleteResidente(@PathVariable Integer id){
         try {
             if (residenteServices.getResidenteById(id) == null) {
                 return ResponseEntity.status(404).body("No existe esta Casa");
@@ -50,7 +50,7 @@ public class ResidenteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateResidente(@PathVariable Integer id, @Valid @RequestBody Residente residente, BindingResult br){
+    public ResponseEntity<?> updateResidente(@PathVariable Integer id, @Valid @RequestBody Residente residente, BindingResult br){
         if (br.hasErrors()){
             return ResponseEntity.badRequest().body(br.getAllErrors().get(0).getDefaultMessage());
         }

@@ -23,12 +23,12 @@ public class ResidenteServiceImplements implements ResidenteServices {
     @Override
     public Residente saveResidente(Residente residente) throws RuntimeException {
         try {
-            if(residenteRepository.ExistsByNombreResidenteAndDpiResidenteAndTelefonoResidenteAndPosicionAndIdCasa(
-                residente.getNomrbe_residente(),
-                residente.getDpi_residente(),
-                residente.getTelefono_residente(),
+            if(residenteRepository.existsByNombreResidenteAndDpiResidenteAndTelefonoResidenteAndPosicionAndIdCasa(
+                residente.getNombreResidente(),
+                residente.getDpiResidente(),
+                residente.getTelefonoResidente(),
                 residente.getPosicion(),
-                residente.getId_Casa())){
+                residente.getIdResidente())){
 
                 throw new RuntimeException("Ya existe una casa con estos datos");
             }
@@ -42,20 +42,20 @@ public class ResidenteServiceImplements implements ResidenteServices {
     public Residente updateResidente(Integer id, Residente residente) {
         Residente existingResidente = residenteRepository.findById(id).orElseThrow(()-> new RuntimeException("Esta Casa no existe"));
 
-        if (residenteRepository.ExistsByNombreResidenteAndDpiResidenteAndTelefonoResidenteAndPosicionAndIdCasa(
-                residente.getNomrbe_residente(),
-                residente.getDpi_residente(),
-                residente.getTelefono_residente(),
+        if (residenteRepository.existsByNombreResidenteAndDpiResidenteAndTelefonoResidenteAndPosicionAndIdCasa(
+                residente.getNombreResidente(),
+                residente.getDpiResidente(),
+                residente.getTelefonoResidente(),
                 residente.getPosicion(),
-                residente.getId_Casa())){
+                residente.getIdCasa())){
             throw new RuntimeException("Ya existe una Casa con estos datos");
         }
 
-        existingResidente.setNomrbe_residente(residente.getNomrbe_residente());
-        existingResidente.setDpi_residente(residente.getDpi_residente());
-        existingResidente.setTelefono_residente(residente.getTelefono_residente());
+        existingResidente.setNombreResidente(residente.getNombreResidente());
+        existingResidente.setDpiResidente(residente.getDpiResidente());
+        existingResidente.setTelefonoResidente(residente.getTelefonoResidente());
         existingResidente.setPosicion(residente.getPosicion());
-        existingResidente.setId_Casa(residente.getId_Casa());
+        existingResidente.setIdCasa(residente.getIdCasa());
 
         return residenteRepository.save(existingResidente);
     }
