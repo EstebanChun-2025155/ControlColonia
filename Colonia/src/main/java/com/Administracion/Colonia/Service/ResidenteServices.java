@@ -1,9 +1,11 @@
 package com.Administracion.Colonia.Service;
 
 import com.Administracion.Colonia.Entity.Residente;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface ResidenteServices {
     List<Residente> getAllResidente();
     Residente getResidenteById(Integer id);
