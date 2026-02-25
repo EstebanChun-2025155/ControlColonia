@@ -27,6 +27,7 @@ public class  SeguridadServiceImplements implements SeguridadService {
     public Seguridad saveSeguridad(Seguridad seguridad) throws RuntimeException {
         try {
             if (seguridadRepository.existsByidSeguridadAndNombreAndPuestoAndJornadaAndSalarioAndTelefono(
+                    seguridad.getIdSeguridad(),
                     seguridad.getNombre(),
                     seguridad.getPuesto(),
                     seguridad.getJornada(),
@@ -46,6 +47,7 @@ public class  SeguridadServiceImplements implements SeguridadService {
         Seguridad existingSeguridad = seguridadRepository.findById(id).orElseThrow(() -> new RuntimeException("El empleado de seguridad no existe"));
 
         if (seguridadRepository.existsByidSeguridadAndNombreAndPuestoAndJornadaAndSalarioAndTelefono(
+                seguridad.getIdSeguridad(),
                 seguridad.getNombre(),
                 seguridad.getPuesto(),
                 seguridad.getJornada(),
