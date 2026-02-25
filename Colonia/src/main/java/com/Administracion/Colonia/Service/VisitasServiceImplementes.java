@@ -32,26 +32,47 @@ public class VisitasServiceImplementes implements VisitasService{
 
     @Override
     public Visitas saveVisitas(Visitas visitas) throws RuntimeException {
-        return visitasRepository.save(visitas);
+        try {
+            if (visitasRepository.existsByNombreVisitaAndDocumentoAndPlacaAndMotivoAndIdCasa(
+                    visitas.getNombreVisita(),
+                    visitas.getDocumento(),
+                    visitas.getPlaca(),
+                    visitas.getMotivo(),
+                    visitas.getIdCasa())){
+                throw new RuntimeException("Ya existe una visita con estos datos");
+            }
+            return visitasRepository.save(visitas);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override
     public Visitas updateVisitas(Integer id, Visitas visitas) {
-        Visitas visitas1 = visitasRepository.findById(id).orElse(null);
-        if(visitas1 != null) {
-            visitas1.setNombre_visita(visitas.getNombre_visita());
-            visitas1.setDocumento(visitas.getDocumento());
-            visitas1.setPlaca(visitas.getPlaca());
-            visitas1.setMotivo(visitas.getMotivo());
-            visitas1.setId_casa(visitas.getId_casa());
-        }else {
-            throw new IllegalArgumentException("Visita no encontrada");
+        Visitas visitas1 = visitasRepository.findById(id).orElseThrow(() -> new RuntimeException("La Visita no existe")) ;
+        if(visitasRepository.existsByNombreVisitaAndDocumentoAndPlacaAndMotivoAndIdCasa(
+                visitas.getNombreVisita(),
+                visitas.getDocumento(),
+                visitas.getPlaca(),
+                visitas.getMotivo(),
+                visitas.getIdCasa())){
+            throw new RuntimeException("Ya existe una visita con estos datos");
         }
+        visitas1.setNombreVisita(visitas.getNombreVisita());
+        visitas1.setDocumento(visitas.getDocumento());
+        visitas1.setPlaca(visitas.getPlaca());
+        visitas1.setMotivo(visitas.getMotivo());
+        visitas1.setIdCasa(visitas.getIdCasa());
+
         return visitasRepository.save(visitas1);
     }
 
     @Override
     public void deleteVisitas(Integer id) {
-
+        Visitas visitas = visitasRepository.findById(id).orElse(null);
+        if(!visitasRepository.existsById(id)) {
+            throw new IllegalArgumentException("Este id no existe");
+        }
+        visitasRepository.deleteById(id);
     }
 }
