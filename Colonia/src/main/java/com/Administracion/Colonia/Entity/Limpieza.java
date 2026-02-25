@@ -12,7 +12,7 @@ public class Limpieza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_Limpieza")
-    private Integer idLimplieza;
+    private Integer idLimpieza;
 
     @NotBlank(message = "El campo de texto no debe de estar vacios")
     @Column(name = "nombre")
@@ -38,12 +38,12 @@ public class Limpieza {
     @Column(name = "telefono")
     private String telefono;
 
-    public Integer getIdLimplieza() {
-        return idLimplieza;
+    public Integer getIdLimpieza() {
+        return idLimpieza;
     }
 
-    public void setIdLimplieza(Integer idLimplieza) {
-        this.idLimplieza = idLimplieza;
+    public void setIdLimpieza(Integer idLimplieza) {
+        this.idLimpieza = idLimplieza;
     }
 
     public String getNombre() {
