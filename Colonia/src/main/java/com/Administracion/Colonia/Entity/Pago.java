@@ -43,4 +43,60 @@ public class Pago {
     @Size(max = 6, message = "La referencia no puede exceder 6 caracteres")
     @Column (name = "referencia")
     private String referencia;
+
+    public Integer getIdPago() {
+        return idPago;
+    }
+
+    public void setIdPago(Integer idPago) {
+        this.idPago = idPago;
+    }
+
+    public Integer getIdResidente() {
+        return idResidente;
+    }
+
+    public void setIdResidente(Integer idResidente) {
+        this.idResidente = idResidente;
+    }
+
+    public String getClasificacionPago() {
+        return clasificacionPago;
+    }
+
+    public void setClasificacionPago(String clasificacionPago) {
+        this.clasificacionPago = clasificacionPago;
+    }
+
+    public Double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(Double monto) {
+        this.monto = monto;
+    }
+
+    public String getFechaPago() {
+        return fechaPago;
+    }
+
+    public void setFechaPago(String fechaPago) {
+        this.fechaPago = fechaPago;
+    }
+
+    public String getMetodo() {
+        return metodo;
+    }
+
+    public void setMetodo(String metodo) {
+        this.metodo = metodo;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
 }
