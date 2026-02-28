@@ -12,7 +12,7 @@ public class Visitas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_visita")
-    private Integer id_visita;
+    private Integer id;
 
 
     @NotBlank(message = "El campo de texto no debe de estar vacio")
@@ -25,7 +25,7 @@ public class Visitas {
     private String documento;
 
     @NotBlank(message = "El campo de texto no debe de estar vacio")
-    @Size(max = 6, message = "La placa no puede exceder de 6 caracteres")
+    @Size(max = 7, message = "La placa no puede exceder de 7 caracteres")
     @Column(name = "placa")
     private String placa;
 
@@ -39,12 +39,13 @@ public class Visitas {
 
     //Se agregan Getters and Setters
 
-    public Integer getId_visita() {
-        return id_visita;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_visita(Integer id_visita) {
-        this.id_visita = id_visita;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombreVisita() {
@@ -53,6 +54,14 @@ public class Visitas {
 
     public void setNombreVisita(String nombreVisita) {
         this.nombreVisita = nombreVisita;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     public String getPlaca() {
@@ -77,13 +86,5 @@ public class Visitas {
 
     public void setIdCasa(Integer idCasa) {
         this.idCasa = idCasa;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
     }
 }
