@@ -49,7 +49,7 @@ public class VisitasServiceImplementes implements VisitasService{
 
     @Override
     public Visitas updateVisitas(Integer id, Visitas visitas) {
-        Visitas visitas1 = visitasRepository.findById(id).orElseThrow(() -> new RuntimeException("La Visita no existe")) ;
+        Visitas visitas1= visitasRepository.findById(id).orElseThrow(() -> new RuntimeException("La Visita no existe")) ;
         if(visitasRepository.existsByNombreVisitaAndDocumentoAndPlacaAndMotivoAndIdCasa(
                 visitas.getNombreVisita(),
                 visitas.getDocumento(),
