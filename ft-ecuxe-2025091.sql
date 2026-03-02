@@ -5,30 +5,30 @@ use DBControColonia_in5cm;
 create table Casa(
 	id_Casa int auto_increment not null,
 	no_De_Casa varchar(5) not null,
-	Direccion varchar(25) not null,
-	Estado enum("ocupada", "disponible", "mantenimiento") not null,
-	Propietario varchar(100) not null,
+	direccion varchar(25) not null,
+	estado enum('ocupada', 'disponible', 'mantenimiento') not null,
+	propietario varchar(100) not null,
 	precio_Casa decimal(12,2) not null,
 	primary key PK_id_casa(id_Casa)
 );
 
 create table Seguridad (
     id_Seguridad int auto_increment not null,
-    Nombre varchar(100) not null,
-    Puesto varchar(100) not null,
-    Jornada enum('dia','noche') not null,
-    Salario decimal(10,2) not null,
-    Telefono varchar(20) not null,
+    nombre varchar(100) not null,
+    puesto varchar(100) not null,
+    jornada enum('dia','noche') not null,
+    salario decimal(10,2) not null,
+    telefono varchar(20) not null,
     primary key PK_id_seguridad(id_Seguridad)
 );
 
 create table Limpieza (
     id_Limpieza int auto_increment not null,
-    Nombre varchar(100) not null,
-    Puesto varchar(100) not null,
-    Jornada enum('manana','tarde') not null,
-    Salario decimal(10,2) not null,
-    Telefono varchar(20) not null,
+    nombre varchar(100) not null,
+    puesto varchar(100) not null,
+    jornada enum('manana','tarde') not null,
+    salario decimal(10,2) not null,
+    telefono varchar(20) not null,
     primary key PK_id_Limpieza(id_Limpieza)
 );
 
@@ -48,7 +48,7 @@ create table Multa (
     descripcion varchar(100) not null,
     fecha_Emision date not null,
     estado enum('pendiente', 'pagado', 'anulada') not null,
-    tipo_Persona enum("visita", "residente") not null,
+    tipo_Persona enum('visita', 'residente') not null,
     primary key PK_id_multa(id_Multa)
 );
 
@@ -69,7 +69,7 @@ create table Residente(
 	nombre_Residente varchar(100) not null,
 	dpi_Residente varchar(13) not null,
 	telefono_Residente varchar(8) not null,
-	Posicion enum("activo", "inactivo") not null,
+	posicion enum('activo', 'inactivo') not null,
 	id_Casa int not null,
 	primary key PK_id_Residente(id_Residente),
 	constraint FK_Residente_Casa foreign key (id_Casa)
@@ -90,7 +90,7 @@ create table Visita(
 
 create table Accesos(
 	id_Acceso int auto_increment not null,
-	tipo_Persona enum("visita", "residente", "personal") not null,
+	tipo_Persona enum('visita', 'residente', 'personal') not null,
 	id_Seguridad int not null,
 	hora_Entrada datetime not null,
 	hora_Salida datetime null,
@@ -120,9 +120,9 @@ create table Pago (
 -- Create --
 Delimiter $$ 
 	create procedure sp_Casa_create(p_no_De_Casa varchar(5), p_Direccion varchar(25), 
-    p_Estado enum("ocupada", "disponible", "mantenimiento"), p_Propietario varchar(100), p_precio_Casa decimal(12, 2))
+    p_Estado enum('ocupada', 'disponible', 'mantenimiento'), p_Propietario varchar(100), p_precio_Casa decimal(12, 2))
     begin 
-		insert into Casa(no_De_Casa, Direccion, Estado, Propietario, precio_Casa)
+		insert into Casa(no_De_Casa, direccion, estado, propietario, precio_Casa)
 		values (p_no_De_Casa, p_Direccion, p_Estado, p_Propietario, p_precio_Casa);
 		select last_insert_id() as id_Casa;
     end $$
@@ -153,9 +153,9 @@ Delimiter $$
 		update Casa
 		set id_Casa = p_id_Casa,
 			no_De_Casa = p_no_De_Casa,
-            Direccion = p_Direccion,
-            Estado = p_Estado,
-            Propietario = p_Propietario,
+            direccion = p_Direccion,
+            estado = p_Estado,
+            propietario = p_Propietario,
             precio_Casa = p_precio_Casa
             where id_Casa = p_id_Casa;
 		select row_count() as filas_afectadas;
@@ -168,7 +168,7 @@ Delimiter $$
     create procedure sp_Seguridad_create(p_nombre varchar(100), p_puesto varchar(100), 
     p_jornada enum('dia','noche'), p_salario decimal(10, 2), p_telefono varchar(20))
     begin 
-        insert into Seguridad(Nombre, Puesto, Jornada, Salario, Telefono)
+        insert into Seguridad(nombre, puesto, jornada, salario, telefono)
         values (p_nombre, p_puesto, p_jornada, p_salario, p_telefono);
         select last_insert_id() as id_Seguridad;
     end $$
@@ -197,11 +197,11 @@ Delimiter $$
     in p_jornada enum('dia','noche'), in p_salario decimal(10, 2), in p_telefono varchar(20))
     begin 
         update Seguridad
-        set Nombre = p_nombre,
-            Puesto = p_puesto,
-            Jornada = p_jornada,
-            Salario = p_salario,
-            Telefono = p_telefono
+        set nombre = p_nombre,
+            puesto = p_puesto,
+            jornada = p_jornada,
+            salario = p_salario,
+            telefono = p_telefono
             where id_Seguridad = p_id_seguridad;
         select row_count() as filas_afectadas;
     end $$
@@ -213,7 +213,7 @@ Delimiter $$
     create procedure sp_Limpieza_create(p_nombre varchar(100), p_puesto varchar(100), 
     p_jornada enum('manana','tarde'), p_salario decimal(10, 2), p_telefono varchar(20))
     begin
-        insert into Limpieza(Nombre, Puesto, Jornada, Salario, Telefono)
+        insert into Limpieza(nombre, puesto, jornada, salario, telefono)
         values (p_nombre, p_puesto, p_jornada, p_salario, p_telefono);
         select last_insert_id() as id_Limpieza;
     end $$
@@ -242,11 +242,11 @@ Delimiter $$
     in p_jornada enum('manana','tarde'), in p_salario decimal(10, 2), in p_telefono varchar(20))
     begin
         update Limpieza
-        set Nombre = p_nombre,
-            Puesto = p_puesto,
-            Jornada = p_jornada,
-            Salario = p_salario,
-            Telefono = p_telefono
+        set nombre = p_nombre,
+            puesto = p_puesto,
+            jornada = p_jornada,
+            salario = p_salario,
+            telefono = p_telefono
             where id_Limpieza = p_id_limpieza;
         select row_count() as filas_afectadas;
     end $$
@@ -258,7 +258,7 @@ Delimiter ;
 	create procedure sp_amenidad_create(a_nombre_amenidad varchar(100),a_horario_uso varchar(30),
     a_costo_uso decimal(12,2),a_estado enum('disponible','ocupado','mantenimiento'),a_capacidad int)
 		begin
-			insert into Amenidades(nombre_Amenidad, horario_uso, costo_uso, Estado, Capacidad)
+			insert into Amenidades(nombre_Amenidad, horario_uso, costo_uso, estado, capacidad)
 			values(a_nombre_amenidad, a_horario_uso, a_costo_uso, a_estado, a_capacidad);
 			select last_insert_id() as id_amenidad;
 		end $$
@@ -290,8 +290,8 @@ Delimiter ;
 			set nombre_Amenidad = a_nombre_amenidad,
 				horario_uso = p_horario_uso,
 				costo_uso = p_costo_uso,
-				Estado = p_estado,
-				Capacidad = p_capacidad
+				estado = p_estado,
+				capacidad = p_capacidad
 			where id_Amenidad = p_id_amenidad;
 		select row_count() as filas_afectadas;
 		end $$
@@ -359,7 +359,7 @@ delimiter ;
 		create procedure sp_vehiculo_create(p_placa varchar(8), p_marca_modelo varchar(30),
 		p_color varchar(20), p_propietario varchar(100),p_id_casa int)
 		begin
-			insert into Vehiculos(Placa, marca_modelo, Color, Propietario, id_Casa)
+			insert into Vehiculos(placa, marca_modelo, color, propietario, id_Casa)
 			values (p_placa, p_marca_modelo, p_color, p_propietario, p_id_casa);
 		end $$
 	Delimiter ;
@@ -401,9 +401,9 @@ delimiter ;
 -- Create --
 Delimiter $$
 	create procedure sp_Residente_create(p_nombre_Residente varchar(100), p_dpi_Residente varchar(13),
-    p_telefono_Residente varchar(8), p_Posicion enum("activo","inactivo"), p_id_Casa int)
+    p_telefono_Residente varchar(8), p_Posicion enum('activo','inactivo'), p_id_Casa int)
     begin
-		insert into Residente(nombre_Residente, dpi_Residente, telefono_Residente, Posicion, id_Casa)
+		insert into Residente(nombre_Residente, dpi_Residente, telefono_Residente, posicion, id_Casa)
 		values (p_nombre_Residente, p_dpi_Residente, p_telefono_Residente, p_Posicion, p_id_Casa);
 		select last_insert_id() as id_residente;
     end $$
@@ -429,14 +429,14 @@ Delimiter ;
 -- Update -- 
 Delimiter $$
 	create procedure sp_Residente_update(in p_id_Residente int, in p_nombre_Residente varchar(100), in p_dpi_Residente varchar(13),
-    in p_telefono_Residente varchar(8), in p_Posicion enum("activo","inactivo"), in p_id_Casa int)
+    in p_telefono_Residente varchar(8), in p_Posicion enum('activo','inactivo'), in p_id_Casa int)
     begin
 		update Residente
 		set id_Residente = p_id_Residente,
 			nombre_Residente = p_nombre_Residente,
             dpi_Residente = p_dpi_Residente,
             telefono_Residente = p_telefono_Residente,
-            Posicion = p_Posicion,
+            posicion = p_Posicion,
             id_Casa = p_id_Casa
             where id_Residente = p_id_Residente;
 		select row_count() as filas_afectadas;
@@ -501,7 +501,7 @@ delimiter ;
 -- Accesos--
 -- create--
 delimiter $$
-create procedure sp_Accesos_create(in p_tipo_Persona enum("visita", "residente", "personal"), in p_id_Seguridad varchar(20),
+create procedure sp_Accesos_create(in p_tipo_Persona enum('visita', 'residente', 'personal'), in p_id_Seguridad varchar(20),
 								   in p_hora_Entrada datetime,in p_hora_Salida datetime)
 begin
 	insert into Accesos(tipo_Persona,
@@ -535,7 +535,7 @@ delimiter ;
 
 -- Update--
 delimiter $$
-create procedure  sp_Accesos_update(in p_id_Acceso int, in p_tipo_Persona enum("visita", "residente", "personal"), in p_id_Seguridad varchar(20),
+create procedure  sp_Accesos_update(in p_id_Acceso int, in p_tipo_Persona enum('visita', 'residente', 'personal'), in p_id_Seguridad varchar(20),
 								   in p_hora_Entrada datetime,in p_hora_Salida datetime)
 begin 
 		update Accesos
@@ -606,16 +606,16 @@ begin
 end $$
 delimiter ;
 
-CALL sp_casa_create('C001','Zona 1, Av 1','ocupada','Ana López',250000.00);
-CALL sp_casa_create('C002','Zona 2, Calle 3','disponible','Carlos Méndez',310500.00);
-CALL sp_casa_create('C003','Zona 3, Av 5','mantenimiento','María Pérez',275900.00);
-CALL sp_casa_create('C004','Zona 4, Calle 1','ocupada','Luis García',420000.00);
-CALL sp_casa_create('C005','Zona 5, Av 2','disponible','Sofía Ramírez',198750.00);
-CALL sp_casa_create('C006','Zona 6, Calle 8','ocupada','Jorge Castillo',365000.00);
-CALL sp_casa_create('C007','Zona 7, Av 4','mantenimiento','Paola Díaz',289999.99);
-CALL sp_casa_create('C008','Zona 8, Calle 6','disponible','Miguel Hernández',330250.50);
-CALL sp_casa_create('C009','Zona 9, Av 3','ocupada','Elena Morales',410800.00);
-CALL sp_casa_create('C010','Zona 10, Calle 2','disponible','Ricardo Flores',299000.00);
+CALL sp_casa_create('C001','Avenida 1, Calle 1','ocupada','Ana López',250000.00);
+CALL sp_casa_create('C002','Avenida 2, Calle 3','disponible','Carlos Méndez',310500.00);
+CALL sp_casa_create('C003','Avenida 3, Calle 5','mantenimiento','María Pérez',275900.00);
+CALL sp_casa_create('C004','Avenida 4, Calle 1','ocupada','Luis García',420000.00);
+CALL sp_casa_create('C005','Avenida 5, Calle 2','disponible','Sofía Ramírez',198750.00);
+CALL sp_casa_create('C006','Avenida 6, Calle 8','ocupada','Jorge Castillo',365000.00);
+CALL sp_casa_create('C007','Avenida 7, Calle 4','mantenimiento','Paola Díaz',289999.99);
+CALL sp_casa_create('C008','Avenida 8, Calle 6','disponible','Miguel Hernández',330250.50);
+CALL sp_casa_create('C009','Avenida 9, Calle 3','ocupada','Elena Morales',410800.00);
+CALL sp_casa_create('C010','Avenida 10, Calle 2','disponible','Ricardo Flores',299000.00);
 
 CALL sp_seguridad_create('Juan Pérez', 'Guardia de Garita', 'dia', 3500.00, '5544-3322');
 CALL sp_seguridad_create('Roberto Gómez', 'Vigilante Nocturno', 'noche', 3800.00, '4433-2211');
