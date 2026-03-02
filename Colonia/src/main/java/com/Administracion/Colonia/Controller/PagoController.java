@@ -58,7 +58,7 @@ public class PagoController {
             pagoService.deletePago(id);
             return ResponseEntity.status(202).build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al eliminar Pago");
+            return ResponseEntity.badRequest().body("Error al eliminar el Pago");
         }
     }
 }

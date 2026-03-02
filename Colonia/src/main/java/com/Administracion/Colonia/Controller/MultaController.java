@@ -54,12 +54,12 @@ public class MultaController {
     public ResponseEntity<Object> deleteMulta(@PathVariable Integer id){
         try {
             if(multaService.getMultaById(id) == null) {
-                return ResponseEntity.status(404).body("No exsite esta Multa");
+                return ResponseEntity.status(404).body("No existe esta Multa");
             }
             multaService.deleteMulta(id);
             return ResponseEntity.status(202).build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al eliminar Multa");
+            return ResponseEntity.badRequest().body("Error al eliminar la Multa");
         }
     }
 }
