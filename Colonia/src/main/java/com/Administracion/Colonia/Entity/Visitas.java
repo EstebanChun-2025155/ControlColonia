@@ -20,12 +20,12 @@ public class Visitas {
     private String nombreVisita;
 
     @NotBlank(message = "El campo de texto no debe de estar vacio")
-    @Size(max = 11, message = "El documento no puede exceder de 11 caracteres")
+    @Size(min = 11, max = 11, message = "El documento no puede exceder de 11 caracteres")
     @Column(name = "documento")
     private String documento;
 
     @NotBlank(message = "El campo de texto no debe de estar vacio")
-    @Size(max = 7, message = "La placa no puede exceder de 7 caracteres")
+    @Size(min = 8, max = 8, message = "La placa no puede exceder de 8 caracteres")
     @Column(name = "placa")
     private String placa;
 
