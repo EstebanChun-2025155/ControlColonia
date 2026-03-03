@@ -17,5 +17,4 @@ public interface AmenidadRepository extends JpaRepository<Amenidad,Integer> {
             Integer capacidad
     );
 
-    boolean existsByNombreAmenidadAndHorarioUsoAndCostoUsoAndEstadoAndCapacidad(Integer idAmenidad, @NotBlank(message = "Debe rellenar el nombre") String nombreAmenidad, @NotBlank(message = "Debe rellenar el horario") String horarioUso, double costoUso, @NotBlank(message = "Debe rellenar el estado") String estado, Integer capacidad);
-}
+    }
