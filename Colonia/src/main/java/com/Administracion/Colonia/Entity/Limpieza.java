@@ -11,22 +11,22 @@ public class Limpieza {
     @Column(name = "id_Limpieza")
     private Integer idLimpieza;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacios")
+    @NotBlank(message = "El campo de nombre no debe de estar vacios")
     @Column(name = "nombre")
     private String nombre;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacios")
+    @NotBlank(message = "El campo de puesto no debe de estar vacios")
     @Column(name = "puesto")
     private String puesto;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacios")
+    @NotBlank(message = "El campo de jornada no debe de estar vacios")
     @Pattern( regexp  = "^(manana|tarde)$",
             message =  "El estado es valido unicamente bajo la jornada: manana o tarde")
     @Column(name = "jornada")
     private String jornada;
 
     @NotNull(message = "El salario no debe estar vacío")
-    @DecimalMin(value = "3500.00", message = "El salario debe ser mayor a 3500.00")
+    @DecimalMin(value = "3100.00", message = "El salario debe ser al menos de 3100.00")
     @Column(name = "salario")
     private Double salario;
 
