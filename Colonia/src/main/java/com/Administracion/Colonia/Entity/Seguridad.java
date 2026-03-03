@@ -11,22 +11,22 @@ public class Seguridad {
     @Column(name = "id_Seguridad")
     private Integer idSeguridad;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacios")
+    @NotBlank(message = "El campo de nombre no debe de estar vacios")
     @Column(name = "nombre")
     private String nombre;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacios")
+    @NotBlank(message = "El campo de puesto no debe de estar vacios")
     @Column(name = "puesto")
     private String puesto;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacios")
+    @NotBlank(message = "El campo de jornada no debe de estar vacios")
     @Pattern( regexp  = "^(dia|noche)$",
             message =  "El estado es valido unicamente bajo la jornada: dia o noche")
     @Column(name = "jornada")
     private String jornada;
 
     @NotNull(message = "El salario no debe estar vacío")
-    @DecimalMin(value = "3500.00", message = "El salario debe ser mayor a 3500.00")
+    @DecimalMin(value = "3400.00", message = "El salario debe ser como mínimo 3400.00")
     @Column(name = "salario")
     private Double salario;
 
