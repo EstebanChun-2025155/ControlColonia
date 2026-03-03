@@ -22,6 +22,16 @@ public class MultaController {
     @GetMapping
     public List<Multa> getAllMulta(){ return multaService.getAllMulta(); }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getMultaById(@PathVariable Integer id){
+        try {
+            Multa buscarId = multaService.getMultaById(id);
+            return new ResponseEntity<>(buscarId,HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Object> createMulta(@Valid @RequestBody Multa multa, BindingResult br){
         if (br.hasErrors()){

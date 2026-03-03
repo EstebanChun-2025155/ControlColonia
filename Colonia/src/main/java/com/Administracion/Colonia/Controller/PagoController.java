@@ -1,5 +1,6 @@
 package com.Administracion.Colonia.Controller;
 
+import com.Administracion.Colonia.Entity.Multa;
 import com.Administracion.Colonia.Entity.Pago;
 import com.Administracion.Colonia.Service.PagoService;
 import jakarta.validation.Valid;
@@ -21,6 +22,16 @@ public class PagoController {
 
     @GetMapping
     public List<Pago> getAllPago(){ return pagoService.getAllPago(); }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getPagoById(@PathVariable Integer id){
+        try {
+            Pago buscarId = pagoService.getPagoById(id);
+            return new ResponseEntity<>(buscarId,HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
     @PostMapping
     public ResponseEntity<Object> createPago(@Valid @RequestBody Pago pago, BindingResult br){
