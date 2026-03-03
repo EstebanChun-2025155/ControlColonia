@@ -51,7 +51,6 @@ public class AccesosServiceImplements implements AccesosService{
         Accesos accesos1 = accesosRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("El acceso no existe"));
 
-        // ✅ Ahora excluye el registro actual de la validación
         if(accesosRepository.existsByTipoPersonaAndIdSeguridadAndHoraEntradaAndHoraSalida(
                 accesos.getTipoPersona(),
                 accesos.getIdSeguridad(),
