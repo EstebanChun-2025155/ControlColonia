@@ -38,6 +38,16 @@ public class CasaController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getCasaById(@PathVariable Integer id){
+        try {
+            Casa buscarId = casaService.getCasaById(id);
+            return new ResponseEntity<>(buscarId,HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteCasa(@PathVariable Integer id){
         try {

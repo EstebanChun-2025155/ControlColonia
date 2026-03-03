@@ -36,6 +36,16 @@ public class ResidenteController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getResidenteById(@PathVariable Integer id){
+        try {
+            Residente buscarId = residenteServices.getResidenteById(id);
+            return new ResponseEntity<>(buscarId,HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteResidente(@PathVariable Integer id){
         try {
