@@ -33,6 +33,7 @@ public class Accesos {
     private LocalDateTime horaEntrada;
 
     @NotNull(message = "La hora de entrada no puede estar vacía")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "hora_salida")
     private LocalDateTime horaSalida;
 
