@@ -1,6 +1,7 @@
 package com.Administracion.Colonia.Controller;
 
 import com.Administracion.Colonia.Entity.Limpieza;
+import com.Administracion.Colonia.Entity.Seguridad;
 import com.Administracion.Colonia.Service.LimpiezaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,15 @@ public class LimpiezaController {
     public LimpiezaController(LimpiezaService limpiezaService){
         this.limpiezaService = limpiezaService; }
 
-    @GetMapping
-    public List<Limpieza> getAllLimpieza(){ return limpiezaService.getAllLimpieza(); }
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getLimpiezaById(@PathVariable Integer id){
+        try {
+            Limpieza buscarId = limpiezaService.getLimpiezaById(id);
+            return new ResponseEntity<>(buscarId,HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
     @PostMapping
     public ResponseEntity<Object> createLimpieza(@Valid @RequestBody Limpieza limpieza, BindingResult br){

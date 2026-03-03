@@ -18,8 +18,15 @@ public class SeguridadController {
     public SeguridadController(SeguridadService seguridadService){
         this.seguridadService = seguridadService; }
 
-    @GetMapping
-    public List<Seguridad> getAllSeguridad() {return seguridadService.getAllSeguridad(); }
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getSeguridadById(@PathVariable Integer id){
+        try {
+            Seguridad buscarId = seguridadService.getSeguridadById(id);
+            return new ResponseEntity<>(buscarId,HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
     @PostMapping
     public ResponseEntity<Object> createSeguridad(@Valid @RequestBody Seguridad seguridad, BindingResult br){
