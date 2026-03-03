@@ -2,6 +2,8 @@ package com.Administracion.Colonia.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name ="Vehiculos")
@@ -14,6 +16,9 @@ public class Vehiculo {
     private Integer idVehiculo;
 
     @NotBlank(message = "Debe agregar la placa")
+    @Size(min = 8, max = 8,
+            message = "La placa debe tener exactamente 8 caracteres")
+
     @Column(name = "placa")
     private String placa;
 
@@ -29,7 +34,8 @@ public class Vehiculo {
     @Column(name = "propietario")
     private String propietario;
 
-    @Column(name = "idCasa")
+    @NotNull(message = "La casa no puede ser nula")
+    @Column(name = "idCasa", nullable = false)
     private Integer idCasa;
 
     public Integer getIdVehiculo() {
@@ -40,35 +46,35 @@ public class Vehiculo {
         this.idVehiculo = idVehiculo;
     }
 
-    public @NotBlank(message = "Debe agregar la placa") String getPlaca() {
+    public String getPlaca() {
         return placa;
     }
 
-    public void setPlaca(@NotBlank(message = "Debe agregar la placa") String placa) {
+    public void setPlaca(String placa) {
         this.placa = placa;
     }
 
-    public @NotBlank(message = "Debe llenar el campo") String getMarcaModelo() {
+    public String getMarcaModelo() {
         return marcaModelo;
     }
 
-    public void setMarcaModelo(@NotBlank(message = "Debe llenar el campo") String marcaModelo) {
+    public void setMarcaModelo(String marcaModelo) {
         this.marcaModelo = marcaModelo;
     }
 
-    public @NotBlank(message = "Debe llenar el campo") String getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(@NotBlank(message = "Debe llenar el campo") String color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
-    public @NotBlank(message = "Debe llenar el campo") String getPropietario() {
+    public String getPropietario() {
         return propietario;
     }
 
-    public void setPropietario(@NotBlank(message = "Debe llenar el campo") String propietario) {
+    public void setPropietario(String propietario) {
         this.propietario = propietario;
     }
 
