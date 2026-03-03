@@ -34,7 +34,6 @@ public class AmenidadServiceimplements  implements AmenidadService {
     public Amenidad saveAmenidad(Amenidad amenidad) throws RuntimeException {
         try {
             if (amenidadRepository.existsByNombreAmenidadAndHorarioUsoAndCostoUsoAndEstadoAndCapacidad(
-                    amenidad.getIdAmenidad(),
                     amenidad.getNombreAmenidad(),
                     amenidad.getHorarioUso(),
                     amenidad.getCostoUso(),
@@ -52,7 +51,6 @@ public class AmenidadServiceimplements  implements AmenidadService {
 
     @Override
     public Amenidad updateAmenidad(Integer id, Amenidad amenidad) {
-
         Amenidad existingAmenidad = amenidadRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("La amenidad no existe"));
 
@@ -79,6 +77,7 @@ public class AmenidadServiceimplements  implements AmenidadService {
     public void deleteAmenidad(Integer id) {
         if (!amenidadRepository.existsById(id)) {
             throw new RuntimeException("Este id no existe");
+
         }
         amenidadRepository.deleteById(id);
     }
