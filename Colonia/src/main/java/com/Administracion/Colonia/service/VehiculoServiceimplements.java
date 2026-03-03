@@ -83,5 +83,10 @@ public class VehiculoServiceimplements implements VehiculoService {
         vehiculoRepository.deleteById(id);
 
     }
+
+    @Override
+    public void deleteVehiculo(Integer id) {
+
+    }
 }
 
