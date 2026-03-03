@@ -1,82 +1,71 @@
 package com.Administracion.Colonia.controller;
 
 import com.Administracion.Colonia.entity.Amenidad;
-import com.Administracion.Colonia.repository.AmenidadRepository;
+import com.Administracion.Colonia.service.AmenidadService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/amenidades")
 public class AmenidadController {
 
-    private final AmenidadRepository amenidadRepository;
+    private final AmenidadService amenidadService;
 
-    public AmenidadController(AmenidadRepository amenidadRepository){
-        this.amenidadRepository = amenidadRepository;
+    public AmenidadController(AmenidadService amenidadService){
+        this.amenidadService = amenidadService;
     }
 
-    // LISTAR TODOS
+
     @GetMapping
-    public List<Amenidad> listarTodos(){
-        return amenidadRepository.findAll();
-    }
+    public List<Amenidad> listarTodos(){return amenidadService.getAllAmenidad();}
 
-    // CREAR
+
     @PostMapping
-    public ResponseEntity<Object> crearAmenidad(@Valid @RequestBody Amenidad amenidad, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errores = new HashMap<>();
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errores.put(error.getField(),error.getDefaultMessage());
-            }
-            return ResponseEntity.badRequest().body(errores);
+   public ResponseEntity<Object> createAmenidad(@Valid @RequestBody Amenidad amenidad, BindingResult br){
+        if (br.hasErrors()){
+            return ResponseEntity.badRequest().body(br.getAllErrors().get(0).getDefaultMessage());
         }
-
-        Amenidad nuevo = amenidadRepository.save(amenidad);
-        return ResponseEntity.ok(nuevo);
+        try {
+            Amenidad createAmenidad = amenidadService.saveAmenidad(amenidad);
+            return new ResponseEntity<>(createAmenidad, HttpStatus.CREATED);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
-    // ACTUALIZAR
-    @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarAmenidad(@PathVariable Integer id, @Valid @RequestBody Amenidad amenidadActualizado, BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errores = new HashMap<>();
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errores.put(error.getField(), error.getDefaultMessage());
-            }
-            return ResponseEntity.badRequest().body(errores);
-        }
-
-        return amenidadRepository.findById(id).map(amenidad -> {
-
-            amenidad.setNombreAmenidad(amenidadActualizado.getNombreAmenidad());
-            amenidad.setHorarioUso(amenidadActualizado.getHorarioUso());
-            amenidad.setCostoUso(amenidadActualizado.getCostoUso());
-            amenidad.setEstado(amenidadActualizado.getEstado());
-            amenidad.setCapacidad(amenidadActualizado.getCapacidad());
-
-            return ResponseEntity.ok(amenidadRepository.save(amenidad));
-
-        }).orElse(ResponseEntity.notFound().build());
-    }
-
-    // ELIMINAR
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarAmenidad(@PathVariable Integer id){
-        if(!amenidadRepository.existsById(id)){
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<Object> deleteAmenidad(@PathVariable Integer id){
+        try {
+            if (amenidadService.getAmenidadByid(id) == null) {
+                return ResponseEntity.status(404).body("No Existe esta Amenidad");
+            }
+            amenidadService.deleteAmenidad(id);
+            return ResponseEntity.status(202).build();
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al eliminar Amenidad");
         }
-        amenidadRepository.deleteById(id);
-        return ResponseEntity.ok("Amenidad eliminado correctamente");
     }
+
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateAmenidad(@PathVariable Integer id , @Valid @RequestBody Amenidad amenidad, BindingResult br){
+    if (br.hasErrors()){
+        return ResponseEntity.badRequest().body(br.getAllErrors().get(0).getDefaultMessage());
+    }
+    try {
+        Amenidad actualizado = amenidadService.updateAmenidad(id,amenidad);
+            return ResponseEntity.ok(actualizado);
+     }  catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+         }
+     }
 }
 
