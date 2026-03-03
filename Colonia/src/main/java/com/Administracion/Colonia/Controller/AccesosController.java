@@ -1,11 +1,11 @@
 package com.Administracion.Colonia.Controller;
 
 import com.Administracion.Colonia.Entity.Accesos;
-import com.Administracion.Colonia.Entity.Visitas;
 import com.Administracion.Colonia.Service.AccesosService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +25,10 @@ public class AccesosController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createAcceso(@Valid @RequestBody Accesos accesos){
+    public ResponseEntity<Object> createAcceso(@Valid @RequestBody Accesos accesos, BindingResult br){
+        if (br.hasErrors()){
+            return ResponseEntity.badRequest().body(br.getAllErrors().get(0).getDefaultMessage());
+        }
         try {
             Accesos createAcceso = accesosService.saveAcceso(accesos);
             return new ResponseEntity<>(createAcceso, HttpStatus.CREATED);
@@ -35,7 +38,10 @@ public class AccesosController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateAcceso(@Valid @RequestBody Accesos accesos, @PathVariable Integer id){
+    public ResponseEntity<Object> updateAcceso(@Valid @RequestBody Accesos accesos, @PathVariable Integer id, BindingResult br){
+        if (br.hasErrors()){
+            return ResponseEntity.badRequest().body(br.getAllErrors().get(0).getDefaultMessage());
+        }
         try {
             Accesos updateAcceso = accesosService.updateAcceso(id, accesos);
             return new ResponseEntity<>(updateAcceso, HttpStatus.OK);
@@ -49,16 +55,19 @@ public class AccesosController {
         try {
             Accesos searchedAccesos = accesosService.getAccesosById(id);
             return new ResponseEntity<>(searchedAccesos,HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al eliminar el acceso");
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAccesosById(@PathVariable Integer id){
         try {
+            if(accesosService.getAccesosById(id) == null) {
+                return ResponseEntity.status(404).body("No exsite esta Acceso");
+            }
             accesosService.deleteAccesos(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return  ResponseEntity.status(202).build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
