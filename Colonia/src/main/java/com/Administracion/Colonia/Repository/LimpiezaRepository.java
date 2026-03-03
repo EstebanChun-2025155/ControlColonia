@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface LimpiezaRepository extends JpaRepository<Limpieza, Integer> {
-    Boolean existsByIdLimpiezaAndNombreAndPuestoAndJornadaAndSalarioAndTelefono(
-            Integer idLimpieza,
+    Boolean existsByNombreAndPuestoAndJornadaAndSalarioAndTelefono(
             String nombre,
             String puesto,
             String jornada,
