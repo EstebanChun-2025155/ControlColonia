@@ -1,8 +1,10 @@
 package com.Administracion.Colonia.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +18,8 @@ public class Accesos {
     private Integer id;
 
     @NotBlank(message = "El campo de texto no debe de estar vacio")
+    @Pattern( regexp  = "^(visita|residente|personal)$",
+            message =  "El tipo de persona debe ser: visita, residente o personal")
     @Column(name = "tipo_persona")
     private String tipoPersona;
 
@@ -24,6 +28,7 @@ public class Accesos {
     private Integer idSeguridad;
 
     @NotNull(message = "La hora de entrada no puede estar vacía")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "hora_entrada")
     private LocalDateTime horaEntrada;
 
