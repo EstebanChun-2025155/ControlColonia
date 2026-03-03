@@ -39,6 +39,16 @@ public class AmenidadController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getAmenidadById(@PathVariable Integer id){
+        try {
+            Amenidad searchedAmenidad = amenidadService.getAmenidadByid(id);
+            return new ResponseEntity<>(searchedAmenidad,HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAmenidad(@PathVariable Integer id){

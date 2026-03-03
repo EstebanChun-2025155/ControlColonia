@@ -44,6 +44,16 @@ public class VehiculoController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getVehiculoById(@PathVariable Integer id){
+        try {
+            Vehiculo searchedVehiculo = vehiculoService.getVehiculoByid(id);
+            return new ResponseEntity<>(searchedVehiculo,HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteVehiculo(@PathVariable Integer id){
