@@ -1,10 +1,10 @@
 package com.Administracion.Colonia.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Pago")
@@ -15,6 +15,7 @@ public class Pago {
     @Column (name = "id_Pago")
     private Integer idPago;
 
+    @NotNull(message = "El campo no debe de estar vacio")
     @Column (name = "id_Residente")
     private Integer idResidente;
 
@@ -24,14 +25,14 @@ public class Pago {
     @Column (name = "clasificacion_Pago")
     private String clasificacionPago;
 
+    @NotNull(message = "El campo no debe de estar vacio")
     @DecimalMin(value = "75.01", message = "El monto debe ser mayor a 75.00")
     @Column (name = "monto")
     private Double monto;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacio")
-    @Size(max = 10, message = "La fecha de pago no puede exceder 10 caracteres")
+    @NotNull(message = "El campo no debe de estar vacio")
     @Column (name = "fecha_Pago")
-    private String fechaPago;
+    private LocalDate fechaPago;
 
     @NotBlank(message = "El campo de texto no debe de estar vacio")
     @Pattern( regexp = "^(efectivo|transferencia|tarjeta)$",
@@ -41,6 +42,7 @@ public class Pago {
 
     @NotBlank(message = "El campo de texto no debe de estar vacio")
     @Size(max = 6, message = "La referencia no puede exceder 6 caracteres")
+    @Size(min = 6, message = "La referencia no puede exceder menos de 6 caracteres")
     @Column (name = "referencia")
     private String referencia;
 
@@ -76,11 +78,11 @@ public class Pago {
         this.monto = monto;
     }
 
-    public String getFechaPago() {
+    public LocalDate getFechaPago() {
         return fechaPago;
     }
 
-    public void setFechaPago(String fechaPago) {
+    public void setFechaPago(LocalDate fechaPago) {
         this.fechaPago = fechaPago;
     }
 
