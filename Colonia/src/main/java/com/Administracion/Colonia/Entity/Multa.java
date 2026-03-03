@@ -3,8 +3,10 @@ package com.Administracion.Colonia.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+
+import java.time.LocalDate;
 
 @Entity
 @Table (name = "Multa")
@@ -15,6 +17,7 @@ public class Multa {
     @Column (name = "id_multa")
     private Integer idMulta;
 
+    @NotNull(message = "El campo no debe de estar vacio")
     @DecimalMin(value = "120.01", message = "El precio debe ser mayor a 120.00")
     @Column (name = "monto")
     private Double monto;
@@ -23,10 +26,9 @@ public class Multa {
     @Column (name = "descripcion")
     private String descripcion;
 
-    @NotBlank(message = "El campo de texto no debe de estar vacio")
-    @Size(max = 10, message = "La fecha de emisión no puede exceder 10 caracteres")
+    @NotNull(message = "El campo no debe de estar vacio")
     @Column (name = "fecha_emision")
-    private String fechaEmision;
+    private LocalDate fechaEmision;
 
     @NotBlank(message = "El campo de texto no debe de estar vacio")
     @Pattern( regexp  = "^(pagado|pendiente|anulada)$",
@@ -64,11 +66,11 @@ public class Multa {
         this.descripcion = descripcion;
     }
 
-    public String getFechaEmision() {
+    public LocalDate getFechaEmision() {
         return fechaEmision;
     }
 
-    public void setFechaEmision(String fechaEmision) {
+    public void setFechaEmision(LocalDate fechaEmision) {
         this.fechaEmision = fechaEmision;
     }
 
