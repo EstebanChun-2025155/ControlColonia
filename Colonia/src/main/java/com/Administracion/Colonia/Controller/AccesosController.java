@@ -68,8 +68,8 @@ public class AccesosController {
             }
             accesosService.deleteAccesos(id);
             return  ResponseEntity.status(202).build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al eliminar Acceso");
         }
     }
 }
