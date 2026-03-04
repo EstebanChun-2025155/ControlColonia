@@ -15,11 +15,7 @@ public interface VehiculoService {
 
     Vehiculo saveVehiculo(Vehiculo vehiculo);
 
-    Vehiculo updateVehiculo(Integer id, Amenidad amenidad);
-
     Vehiculo updateVehiculo(Integer id, Vehiculo vehiculo);
-
-    void deleteAmenidad(Integer id);
 
     void deleteVehiculo(Integer id);
 }
