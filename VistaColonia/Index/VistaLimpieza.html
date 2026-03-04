@@ -2,24 +2,24 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Limpieza - Panel Final</title>
+    <title>Limpieza - Panel Operativo</title>
     <link rel="stylesheet" href="../Styles/estilo-limpieza.css">
 </head>
 <body>
     
     <div class="menubar">
-        <div class="container menubar_row">
+        <div class="menubar_row">
             <nav class="menu">
                 <a class="menu_link" href="VistaHome.html">Inicio</a>
-                <a class="menu_link is-active" href="VistaHome.html#admin">Administracion</a>
+                <a class="menu_link is-active" href="VistaHome.html#admin">Administración</a>
                 <a class="menu_link" href="VistaHome.html#ayuda">Ayuda</a>
-                <a class="menu_link" href="VistaHome.html#contacto">Contacto</a>
+                <a class="menu_link" href="VistaHome.html#Contacto">Contacto</a>
             </nav>
         </div>
     </div>
 
     <div class="banner">
-        <h1>Limpieza</h1>
+        <h1>LIMPIEZA</h1>
     </div>
 
     <div class="main-container">
@@ -31,6 +31,13 @@
         <div class="title-section">
             <img src="../Images/icono-de-escritura.png" alt="Icono">
             <h2>REMISIONES DE LIMPIEZA</h2>
+        </div>
+
+        <div class="section-description">
+            <p>
+                Gestión centralizada del personal de mantenimiento. Use las herramientas de control 
+                inferiores para verificar el estado de las áreas y el uso de suministros.
+            </p>
         </div>
 
         <table>
@@ -116,5 +123,51 @@
         </tr>
     </tbody>
 </table>
+
+<section class="vista">
+            <h2 class="vista_titulo">ESTACIONES Y PUNTOS DE CONTROL</h2>
+
+            <input type="radio" name="tabs_lim" id="op1" checked style="display:none;">
+            <input type="radio" name="tabs_lim" id="op2" style="display:none;">
+            <input type="radio" name="tabs_lim" id="op3" style="display:none;">
+
+            <div class="tabs">
+                <label for="op1" class="tab label1">Monitoreo</label>
+                <label for="op2" class="tab label2">Asignaciones</label>
+                <label for="op3" class="tab label3">Reportes</label>
+            </div>
+
+            <div class="panel content1">
+                <h3 class="panel_titulo">Estado de Áreas</h3>
+                <div class="panel_list">
+                    <span><b>Bloque A:</b> Desinfectado</span>
+                    <span><b>Bloque B:</b> En Proceso</span>
+                    <span><b>Jardines:</b> Finalizado</span>
+                    <span><b>Salones:</b> Pendiente</span>
+                </div>
+            </div>
+
+            <div class="panel content2">
+                <h3 class="panel_titulo">Equipo Asignado</h3>
+                <div class="panel_list">
+                    <span><b>Kit 01:</b> Ana Martínez</span>
+                    <span><b>Kit 02:</b> Raúl Cano</span>
+                    <span><b>Insumos:</b> Stock Verificado</span>
+                    <span><b>EPP:</b> Entregado</span>
+                </div>
+            </div>
+
+            <div class="panel content3">
+                <h3 class="panel_titulo">Bitácora Técnica</h3>
+                <div class="panel_list">
+                    <span><b>Consumo:</b> 12L Desinfectante Grado Hospitalario</span>
+                    <span><b>Maquinaria:</b> Pulidora de pisos en mantenimiento</span>
+                    <span><b>Incidencia:</b> Fuga detectada en Baño de Hombres (Sector C)</span>
+                    <span><b>Supervisión:</b> Firma de Elena Rodríguez (Cierre Turno)</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
 </body>
 </html>
