@@ -1,5 +1,5 @@
 
-package com.Administracion.Colonia.entity;
+package com.Administracion.Colonia.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;

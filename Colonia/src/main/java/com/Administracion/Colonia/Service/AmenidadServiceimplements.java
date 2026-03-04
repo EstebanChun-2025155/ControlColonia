@@ -1,6 +1,7 @@
 package com.Administracion.Colonia.Service;
 
-import com.Administracion.Colonia.entity.Amenidad;
+
+import com.Administracion.Colonia.Entity.Amenidad;
 import com.Administracion.Colonia.Repository.AmenidadRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +25,6 @@ public class AmenidadServiceimplements  implements AmenidadService {
         return amenidadRepository.getReferenceById(id);
     }
 
-    @Override
-    public Amenidad getProveedorByid(Integer id) {
-        return null;
-    }
 
     @Override
     public Amenidad saveAmenidad(Amenidad amenidad) throws RuntimeException {

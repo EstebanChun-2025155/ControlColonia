@@ -1,6 +1,6 @@
 package com.Administracion.Colonia.Service;
 
-import com.Administracion.Colonia.entity.Amenidad;
+import com.Administracion.Colonia.Entity.Amenidad;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

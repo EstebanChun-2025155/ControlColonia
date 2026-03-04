@@ -40,9 +40,9 @@ public class ResidenteController {
     public ResponseEntity<Object> getResidenteById(@PathVariable Integer id){
         try {
             Residente buscarId = residenteService.getResidenteById(id);
-            return new ResponseEntity<>(buscarId,HttpStatus.OK);
+            return ResponseEntity.status(404).body("No exsite este Residente");
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body("Error al eliminar el Residente");
         }
     }
 

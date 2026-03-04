@@ -1,7 +1,7 @@
+package com.Administracion.Colonia.Controller;
 
-package com.Administracion.Colonia.controller;
-import com.Administracion.Colonia.entity.Vehiculo;
-import com.Administracion.Colonia.service.VehiculoService;
+import com.Administracion.Colonia.Entity.Vehiculo;
+import com.Administracion.Colonia.Service.VehiculoServiceimplements;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +11,15 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-import java.util.Objects;
 
 
 @RestController
 @RequestMapping("/api/vehiculos")
 public class VehiculoController {
 
-    private final VehiculoService vehiculoService;
+    private final VehiculoServiceimplements vehiculoService;
 
-    public VehiculoController(VehiculoService vehiculoService){
+    public VehiculoController(VehiculoServiceimplements vehiculoService){
         this.vehiculoService = vehiculoService;
     }
 

@@ -1,8 +1,7 @@
+package com.Administracion.Colonia.Controller;
 
-package com.Administracion.Colonia.controller;
-
-import com.Administracion.Colonia.entity.Amenidad;
-import com.Administracion.Colonia.service.AmenidadService;
+import com.Administracion.Colonia.Entity.Amenidad;
+import com.Administracion.Colonia.Service.AmenidadService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

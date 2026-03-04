@@ -40,9 +40,9 @@ public class CasaController {
     public ResponseEntity<Object> getCasaById(@PathVariable Integer id){
         try {
             Casa buscarId = casaService.getCasaById(id);
-            return new ResponseEntity<>(buscarId,HttpStatus.OK);
+            return ResponseEntity.status(404).body("No existe esta Casa");
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body("Error al eliminar la Casa");
         }
     }
 
