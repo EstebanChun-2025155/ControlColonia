@@ -12,7 +12,6 @@ public interface AmenidadService {
 
     Amenidad getAmenidadByid(Integer id);
 
-
     Amenidad saveAmenidad(Amenidad amenidad) throws RuntimeException;
 
     Amenidad updateAmenidad(Integer id, Amenidad amenidad);
