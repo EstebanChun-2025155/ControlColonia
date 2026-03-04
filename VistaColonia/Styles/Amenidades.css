@@ -92,3 +92,70 @@ tbody tr:hover { background: rgba(11,59,140,.06); transition: background .12s; }
     background: rgba(11,59,140,.12);
     color: #0b3b8c;
 }
+
+/* Componente vista con pestañas */
+.vista {
+    padding: 20px 0;
+}
+.vista_titulo {
+    margin: 0 0 10px;
+    color: var(--blue2);
+    font-weight: 900;
+}
+
+/* Pestañas */
+.tabs {
+    display: flex;
+    gap: 8px;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px;
+    width: fit-content;
+}
+
+.tab {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--blue2);
+    font-weight: 800;
+}
+
+.tab_activa {
+    background: rgba(11,59,140,.08);
+    border-color: rgba(11,59,140,.35);
+}
+
+.panel {
+    margin-top: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    padding: 14px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.06);
+}
+
+.panel_titulo {
+    margin: 0 0 6px;
+    color: var(--blue);
+    font-weight: 900;
+}
+
+.panel_texto {
+    margin: 0 0 10px;
+    color: var(--muted);
+}
+
+/* Demo simple */
+.panel_demo {
+    display: grid;
+    gap: 6px;
+}
+.panel_demo span {
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--soft);
+}
