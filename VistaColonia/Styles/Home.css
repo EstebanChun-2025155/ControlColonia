@@ -116,6 +116,25 @@ a{
     background: rgba(255,255,255,.92);
 }
 
+/*Descripcion */
+.seccionIntro{
+  padding: 26px 0;
+}
+
+.seccionIntro_titulo{
+  text-align: center;
+  margin: 0 0 8px;
+  color: var(--blue2);
+  font-weight: 900;
+}
+
+.seccionIntro_texto{
+  margin: 0 auto;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 75ch;
+  text-align: center;
+}
 
 /* Seccion Administracion */
 .seccion{
