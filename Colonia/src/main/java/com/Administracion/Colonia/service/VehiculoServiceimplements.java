@@ -43,10 +43,6 @@ public class VehiculoServiceimplements implements VehiculoService {
         }
     }
 
-    @Override
-    public Vehiculo updateVehiculo(Integer id, Amenidad amenidad) {
-        return null;
-    }
 
     @Override
     public Vehiculo updateVehiculo(Integer id, Vehiculo vehiculo) {
@@ -76,7 +72,7 @@ public class VehiculoServiceimplements implements VehiculoService {
     }
 
     @Override
-    public void deleteAmenidad(Integer id) {
+    public void deleteVehiculo(Integer id) {
         if (!vehiculoRepository.existsById(id)) {
             throw new RuntimeException("Este id no existe");
         }
@@ -84,9 +80,5 @@ public class VehiculoServiceimplements implements VehiculoService {
 
     }
 
-    @Override
-    public void deleteVehiculo(Integer id) {
-
-    }
 }
 
