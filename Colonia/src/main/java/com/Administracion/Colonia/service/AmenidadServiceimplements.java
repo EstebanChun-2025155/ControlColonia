@@ -25,10 +25,6 @@ public class AmenidadServiceimplements  implements AmenidadService {
         return amenidadRepository.getReferenceById(id);
     }
 
-    @Override
-    public Amenidad getProveedorByid(Integer id) {
-        return null;
-    }
 
     @Override
     public Amenidad saveAmenidad(Amenidad amenidad) throws RuntimeException {
