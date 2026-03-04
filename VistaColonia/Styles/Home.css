@@ -207,3 +207,29 @@ a{
     font-size: 13px;
     text-align: center;
 }
+
+/* Lista generada desde tablas (estilo tipo tarjetas/estado) */
+.panel_list{
+    margin-top: 12px;
+    display: grid;
+    gap: 10px;
+}
+.panel_list .list-item{
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 18px;
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 14px rgba(0,0,0,.04);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.panel_list .list-item::before{
+    content: "";
+    width: 6px;
+    height: 44px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, var(--green), #74a92a);
+    display: block;
+}
+.panel_list .list-item strong{ color: var(--blue2); margin-right: 6px; }
