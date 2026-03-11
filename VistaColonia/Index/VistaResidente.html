@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residente</title>
+    <meta name="description" content="Residente">
+    <link rel="stylesheet" href="../Styles/Residente.css">
+</head>
+<body>
+
+    <div class="menuResidente">
+        <div class="container menuResidente_row">
+            <nav class="menu" aria-label="Menu Principal">
+                <a class="menuResidente_link is-active" href="VistaHome.html">Inicio</a>
+                <a class="menuResidente_link" href="#adminResidente">Administracion Residentes</a>
+                <a class="menuResidente_link" href="#ayuda">Atuda</a>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <section class="frontResidente" aria-label="PortadaResidente">
+            <img class="frontResidente_img" src="../Images/VistaResidente.png">
+
+            <div class="frontResidente_overlay">
+                <div class="container frontResidente_content">
+                    <h1>RESIDENTES</h1>
+                    <p> 
+                        Aqui podras manejar todas la consultas relacionadas con la informacion personal
+                        almacenada sobre los residentes que viven dentro de la colonia.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="panelResidente">
+            <span>ADMINISTRACIÓN</span>
+        </div>
+
+        <div class="seccionResidente">
+            <img src="../Images/IconoResidentes.png" alt="Icono de Residentes">
+            <h2>ADMINISTRACIÓN DE RESIDENTES</h2>
+        </div>
+
+        <table> 
+            <thead>
+                <tr>
+                    <th>Nombre del Residente</th>
+                    <th>DPI del Residente</th>
+                    <th>Telefono del Residente</th>
+                    <th>Posicion del Residente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ana López</td>
+                    <td>1234567890123</td>
+                    <td>55123456</td>
+                    <td>Activo</td>
+                </tr>
+                <tr>
+                    <td>Carlos Méndez</td>
+                    <td>2345678901234</td>
+                    <td>55234567</td>
+                    <td>Inactivo</td>
+                </tr>
+                <tr>
+                    <td>María Pérez</td>
+                    <td>3456789012345</td>
+                    <td>55345678</td>
+                    <td>Activo</td>
+                </tr>
+                <tr>
+                    <td>Luis García</td>
+                    <td>4567890123456</td>
+                    <td>55456789</td>
+                    <td>Activo</td>
+                </tr>
+                <tr>
+                    <td>Sofía Ramírez</td>
+                    <td>5678901234567</td>
+                    <td>55567890</td>
+                    <td>Activo</td>
+                </tr>
+                <tr>
+                    <td>Jorge Castillo</td>
+                    <td>6789012345678</td>
+                    <td>55678901</td>
+                    <td>Activo</td>
+                </tr>
+                <tr>
+                    <td>Paola Díaz</td>
+                    <td>7890123456789</td>
+                    <td>55789012</td>
+                    <td>Activo</td>
+                </tr>
+                <tr>
+                    <td>Miguel Hernández</td>
+                    <td>8901234567890</td>
+                    <td>55890123</td>
+                    <td>Inactivo</td>
+                </tr>
+                <tr>
+                    <td>Elena Morales</td>
+                    <td>9012345678901</td>
+                    <td>55901234</td>
+                    <td>Inactivo</td>
+                </tr>
+                <tr>
+                    <td>Ricardo Flores</td>
+                    <td>0123456789012</td>
+                    <td>55012345</td>
+                    <td>Inactivo</td>
+                </tr>
+            </tbody>
+        </table>
+        <section class="tablaResidente">
+            <h2 class="tablaResidente_titulo">CASAS Y REGISTRO</h2>
+
+            <input type="radio" name="tabs_Residente" id="s1" checked>
+            <input type="radio" name="tabs_Residente" id="s2" >
+            <input type="radio" name="tabs_Residente" id="s3" >
+
+        <div class="tabs_Residente">
+            <label for="s1" class="tab">Listado de residentes</label>
+            <label for="s2" class="tab">Estado y casas</label>
+            <label for="s3" class="tab">Contacto</label>
+        </div>
+
+            <div class="ContenidoResidente">
+                <h3 class="Contenido_Residente">Residentes</h3>
+                <div class="Lista_Contenido">
+                    <span><b>R001:</b>Residentes</span>
+                    <span><b>R002:</b>Carlos Méndez</span>
+                    <span><b>R003:</b>María Pérez</span>
+                    <span><b>R004:</b>Luis García</span>
+                </div>
+            </div>
+            <div class="ContenidoResidente2">
+                <h3 class="Contenido_Residente2">Casa asignada y estado</h3>
+                <div class="Lista_Contenido2">
+                    <span><b>R001:</b>Casa C001 — Activo</span>
+                    <span><b>R002:</b>Casa C002 — Inactivo</span>
+                    <span><b>R003:</b>Casa C003 — Activo</span>
+                    <span><b>R004:</b>Casa C004 — Activo</span>
+                </div>
+            </div>
+            <div class="ContenidoResidente3">
+                <h3 class="Contenido_Residente3">Fecha de Mantenimiento</h3>
+                <div class="Lista_Contenido3">
+                    <span><b>R001:</b>Tel: 55551234</span>
+                    <span><b>R002:</b>Tel: 55552345</span>
+                    <span><b>R003:</b>Tel: 55553456</span>
+                    <span><b>R004:</b>Tel: 55554567</span>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
